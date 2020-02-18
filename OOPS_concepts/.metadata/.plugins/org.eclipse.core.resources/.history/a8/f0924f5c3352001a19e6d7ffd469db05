@@ -1,0 +1,27 @@
+package constructor;
+
+class Sample {
+	
+	private int value;
+	
+	
+	
+	//constructor
+	Sample() {
+		 value = 0
+	}
+	
+	public void print() {
+		System.out.println(value);
+	}
+}
+
+public class Main {
+
+	public static void main(String[] args) {
+		Sample s = new Sample();
+		s.print();
+
+	}
+
+}

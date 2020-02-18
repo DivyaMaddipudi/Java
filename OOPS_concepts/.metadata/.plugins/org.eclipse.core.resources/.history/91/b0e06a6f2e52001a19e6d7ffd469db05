@@ -1,0 +1,27 @@
+package static_and_nonstatic;
+
+class Mymath {
+	
+	public int add(int x, int y) {
+		return x + y;
+	}
+	
+	public int sub(int x, int y) {
+		return x - y;
+	}
+}
+public class Main {
+
+	public static void main(String[] args) {
+		
+		Mymath obj = new Mymath();
+		
+		int a = obj.add(10,20);
+		int b = obj.sub(30, 20);
+		
+		System.out.println("a is " + a);
+		System.out.println("b is " + b);
+
+	}
+
+}
