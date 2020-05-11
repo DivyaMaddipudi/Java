@@ -1,0 +1,23 @@
+Technologies and Frameworks checklist for the java full stack web developer.
+
+HTML- The web development fundamental. One of the most basic and indispensable skills that every web developer should have.
+CSS- The stylesheet that will control the behaviour and style of the page and everything in it.
+JS- also a web development fundamental, this is the language that comes very close to a complete full stack. It has frameworks for front-end development and back-end development.
+React- One of the most popular client-side frameworks, it is a very valuable skill to have. React is still very much in demand, not only for writing web apps but also mobile apps. Get certified with an online course on ReactJs.
+Vue- Vue is a front-end framework that is supposed to be the best of both worlds of Angular and React. It is increasing in popularity and is a useful skill to know.
+Java- The general purpose language, that’s been around for two decades and more, and is still going strong. This article is all about java and why and how to specialize as a full stack web developer. As such, this is an indispensable skill that you’ll have to learn.
+Core Java- This is not exactly defined, but is popularly used term for the Java Standard Edition. It is the most robust and basic version of Java and has quite a few popular APIs. It also refers to a collection of libraries.
+JSP- Java Server Pages is a back-end technology to crete dynamic, platform independent web application. It supports dynamic content and has access to the whole java API family. This is a must-learn technology.
+Servlets- The programs that are the middle layer, they help in collecting input from user, present information from database and load dynamic content. It is in your best interest to learn servlets.
+Java Web-service/RestFul API- Based on representational state transfer technology for communication in web services development. It is a standard API for get, put, post and delete data. This is something you’ll end up learning if you have to code in java.
+Hibernate- The Object Relational Mapping (ORM) tool for the java programming language. It is a popular choice in enterprise applications for performing database operations. It is a great skill to learn.
+Spring- The most famous framework for enterprise java, it is used to create high functioning, reusable code in java. It is lightweight and can be used to write any java application.
+Spring boot- It is the spring module for rapid application development. It is known as the framework to learn to create a micro service. It is used to create stand alone spring based application, with very little spring configuration.
+Spring security- The JavaEE framework that provides authentication and authorization and more features that are security oriented for an enterprise application. It is a web application framework and is an important tool to learn to manage security for a java application.
+Spring MVC Testing framework- The purpose of this tool is to simplify the testing process of spring MVC using JUnit. It also supports integration testing.
+JUnit- the unit-testing framework for Java that is useful to write and run repeated test. It has promoted test-driven development and is a part of the testing framework xUnit.
+Selenium- For all the web applications out there, Selenium is one of the best software-testing framework. You can author tests without learning a test scripting language. It is used by java developers to test their HTML and JSP files.
+Git- the distributed version control system is very important for collaboration. Every small change in coding can be detected with git which sores every version of the code ever written.
+
+
+JSP 
