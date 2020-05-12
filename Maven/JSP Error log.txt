@@ -21,3 +21,15 @@ Git- the distributed version control system is very important for collaboration.
 
 
 JSP 
+-------------------------------------------------
+11-05-2020 web.xml is missing and <failOnMissingWebXml> is set to true
+-------------------------------------------------
+
+I have solved this by using the eclipse "Update Maven Project" (ALT+F5) feature end check the option "Force Update of Snapshots/Releases".
+
+-------------------------------------------------
+
+-----------------------------------------------
+12-05-2020 JSTL Uri to use JSTL Tags
+-----------------------------------------------
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="C" %>
