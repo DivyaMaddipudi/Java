@@ -1,0 +1,8 @@
+----------------------------------------------
+12-05-2020   Web Applicaion using JSP Steps
+----------------------------------------------
+1. Create Empty Maven Project in Eclipse
+2. Goto pom.xml and add tomcat7 + maven compiler plugins + javax dependencies
+3. Cpy and pst the web.xml with the new code available
+4. Create a Servlet by creating a new package and create Get method with the help of HTTP Servlet
+5. add getRequestDispatcher("Path of jsp file").forward method in Get Method  ------->  CREATED JSP FILE IS SHOWN IN BROWSER(/WEB-INF/views/login.jsp)
