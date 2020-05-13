@@ -8,10 +8,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.project.books.BookService;
+
 @WebServlet(urlPatterns="/login")
 public class LoginSerlvet extends HttpServlet {
 
 	  UserAuthService authService = new UserAuthService();
+	  
+	  BookService bookService = new BookService();
 	
 	
 	  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -33,7 +37,12 @@ public class LoginSerlvet extends HttpServlet {
 		  boolean isValidUser = authService.isValid(fname, lname, password);
 		  
 		  if(isValidUser) {
-			  request.getRequestDispatcher("/WEB-INF/views/welcome.jsp").forward(request, response);
+			  
+			  
+			  //request.setAttribute("books", bookService.returnBooks());
+			  
+			  response.sendRedirect("/readbook");
+			  
 		  } else {
 			  request.setAttribute("errorMessage1", "Wrong Values Entered....!");
 			  request.setAttribute("errorMessage2", "Check Details Properly....!");

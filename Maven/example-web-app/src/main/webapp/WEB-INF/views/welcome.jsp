@@ -7,6 +7,6 @@
 <title>Example Project</title>
 </head>
 <body>
-Welcome ${name}
+Welcome
 </body>
 </html>
