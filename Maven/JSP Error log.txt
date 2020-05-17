@@ -63,3 +63,27 @@ SOLUTION:
     <version>1.2</version>
 </dependency>
 
+----------------------------------------------------------------------------
+
+16-05-2020
+ERROR: 
+HTTP Status 405 - HTTP method POST is not supported by this URL
+
+SOLUTION:
+Create Post method in servlet.
+
+----------------------------------------------------------------------------
+ERROR:
+HTTP Status 500 - Cannot forward after response has been committed
+
+SOLUTION:
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		  
+		  String newTodo = request.getParameter("todo");
+		  todoService.addTodo(new Todo(newTodo));
+		  
+		  response.sendRedirect("/todo.do");
+
+-----------------------------------------------------------------------------
+
