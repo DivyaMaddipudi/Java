@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class CreatePin {
-	public void generatePin(int input1, int input2, int input3) {
+	public int generatePin(int input1, int input2, int input3) {
 		String i1 = Integer.toString(input1);
 		String i2 = Integer.toString(input2);
 		String i3 = Integer.toString(input3);
@@ -44,7 +44,7 @@ public class CreatePin {
 		
 		//System.out.println(strMax.toString());
 		int key = Integer.parseInt(max+strMin.toString());
-		System.out.println(key);
+		return key;
 		
 		
 	}
@@ -55,7 +55,7 @@ public class CreatePin {
 		int input2 = sc.nextInt();
 		int input3 = sc.nextInt();
 		CreatePin pin = new CreatePin();
-		pin.generatePin(input1, input2, input3);
+		System.out.println(pin.generatePin(input1, input2, input3));
 		
 		
 	}
