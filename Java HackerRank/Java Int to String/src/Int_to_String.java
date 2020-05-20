@@ -14,6 +14,7 @@ public class Int_to_String {
    //String s=???; Complete this line below
 
     String s = Integer.toString(n);
+    System.out.println(s);
 
    
    if (n == Integer.parseInt(s)) {
