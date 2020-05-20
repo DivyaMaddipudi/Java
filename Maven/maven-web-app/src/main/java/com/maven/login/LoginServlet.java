@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet{
 			  
 			  //todo.do
 			  request.getSession().setAttribute("name", name);
-			  response.sendRedirect("/todo.do");
+			  response.sendRedirect("/list-todo.do");
 			  
 	      } else {
 			  

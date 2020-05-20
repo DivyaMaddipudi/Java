@@ -1,4 +1,4 @@
-package com.maven.todo;
+package logout;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,17 +13,16 @@ import com.maven.todo.TodoService;
 
 
 
-@WebServlet(urlPatterns = "/delete-todo.do")
-public class DeleteTodoServlet extends HttpServlet{
-		
-	  private TodoService todoService = new TodoService();
+@WebServlet(urlPatterns = "/logout.do")
+public class LogoutServlet extends HttpServlet{
 	  
 	  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		  
 		  
-		 todoService.deleteTodo(new Todo(request.getParameter("todo")));
-		 
-		 response.sendRedirect("/list-todo.do");
+		  //request.setAttribute("name", request.getParameter("name"));
+		  //request.setAttribute("password", request.getParameter("password"));
+		  request.getSession().invalidate();
+		  request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
 	  }
 	  
 }

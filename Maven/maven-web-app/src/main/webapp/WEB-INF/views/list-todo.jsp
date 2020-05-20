@@ -32,19 +32,24 @@
 		</ul>
 
 		<ul class="nav navbar-nav navbar-right">
-			<li><a href="/login.do">Login</a></li>
+			<li><a href="/logout.do">Logout</a></li>
 		</ul>
 
 	</nav>
 
 
 	<div class="container">
-		<form action="/login.do" method = "post">
-  		<p><font color="red">${errorMessage}</font></p>
-  		Name: <input type="text" name="name"/>
-  		Password: <input type="password" name="password"/>
-  		<input type="submit" value="login"/>
-		</form> 
+		<p>Welcome ${name} </p>
+		<p>Your Todo's are:</p>
+		<ol>
+			
+			<C:forEach items="${todos}" var="todo">
+			<li>${todo.name} &nbsp; &nbsp; <a href="\delete-todo.do?todo=${todo.name}">Delete</a></li>
+			</C:forEach>
+			
+		</ol>
+		
+		<a href="\add-todo.do">Add New Todo</a></li>
 		
 		</div>
 		

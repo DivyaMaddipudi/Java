@@ -13,17 +13,20 @@ import com.maven.todo.TodoService;
 
 
 
-@WebServlet(urlPatterns = "/delete-todo.do")
-public class DeleteTodoServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/list-todo.do")
+public class ListTodoServlet extends HttpServlet{
 		
 	  private TodoService todoService = new TodoService();
 	  
 	  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		  
 		  
-		 todoService.deleteTodo(new Todo(request.getParameter("todo")));
-		 
-		 response.sendRedirect("/list-todo.do");
+		  //request.setAttribute("name", request.getParameter("name"));
+		  //request.setAttribute("password", request.getParameter("password"));
+		  request.setAttribute("todos", todoService.retriveTodos());
+		  request.getRequestDispatcher("/WEB-INF/views/list-todo.jsp").forward(request, response);
 	  }
+	  
+
 	  
 }

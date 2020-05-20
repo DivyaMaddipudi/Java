@@ -32,20 +32,17 @@
 		</ul>
 
 		<ul class="nav navbar-nav navbar-right">
-			<li><a href="/login.do">Login</a></li>
+			<li><a href="/logout.do">Logout</a></li>
 		</ul>
 
 	</nav>
 
 
 	<div class="container">
-		<form action="/login.do" method = "post">
-  		<p><font color="red">${errorMessage}</font></p>
-  		Name: <input type="text" name="name"/>
-  		Password: <input type="password" name="password"/>
-  		<input type="submit" value="login"/>
-		</form> 
-		
+		Your New Todos
+		<form action="/add-todo.do" method="post">
+			New Todo: <input type = "text" name="todo"/> <input type="submit" value = "Add"/>
+		</form>
 		</div>
 		
 	<footer class="footer">

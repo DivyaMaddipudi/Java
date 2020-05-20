@@ -11,6 +11,7 @@ public class TodoService {
 		todos.add(new Todo("Learn Web Application Development"));
 		todos.add(new Todo("Learn Maven"));
 		todos.add(new Todo("Learn Spring"));
+		todos.add(new Todo("Learning"));
 	}
 	
 	public List<Todo> retriveTodos() {

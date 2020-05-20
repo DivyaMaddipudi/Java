@@ -13,26 +13,26 @@ import com.maven.todo.TodoService;
 
 
 
-@WebServlet(urlPatterns = "/todo.do")
-public class TodoServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/add-todo.do")
+public class AddTodoServlet extends HttpServlet{
 		
 	  private TodoService todoService = new TodoService();
-	  
+
 	  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		  
 		  
 		  //request.setAttribute("name", request.getParameter("name"));
 		  //request.setAttribute("password", request.getParameter("password"));
-		  request.setAttribute("todos", todoService.retriveTodos());
-		  request.getRequestDispatcher("/WEB-INF/views/todo.jsp").forward(request, response);
+		  
+		  request.getRequestDispatcher("/WEB-INF/views/add-todo.jsp").forward(request, response);
 	  }
-	  
+
 	  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		  
 		  String newTodo = request.getParameter("todo");
 		  todoService.addTodo(new Todo(newTodo));
 		  
-		  response.sendRedirect("/todo.do");
+		  response.sendRedirect("/list-todo.do");
 		  //request.setAttribute("name", request.getParameter("name"));
 		  //request.setAttribute("password", request.getParameter("password"));
 		  
