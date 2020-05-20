@@ -42,7 +42,9 @@ public class CreatePin {
 		}
 		
 		
-		System.out.println(max+strMin.toString());
+		//System.out.println(strMax.toString());
+		int key = Integer.parseInt(max+strMin.toString());
+		System.out.println(key);
 		
 		
 	}
