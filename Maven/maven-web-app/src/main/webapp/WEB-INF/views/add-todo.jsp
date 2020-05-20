@@ -39,9 +39,15 @@
 
 
 	<div class="container">
-		Your New Todos
+		Your New Todos:
 		<form action="/add-todo.do" method="post">
-			New Todo: <input type = "text" name="todo"/> <input type="submit" value = "Add"/>
+		<fieldset class="form-group">
+			<label>Description <input type = "text" name="todo" class ="form-control"/></label>
+		</fieldset>
+		<fieldset class="form-group">
+			<label>Category <input type = "text" name="category" class ="form-control"/></label>
+		</fieldset>
+			 <input type="submit" value = "Add" class="btn btn-success"/>
 		</form>
 		</div>
 		
