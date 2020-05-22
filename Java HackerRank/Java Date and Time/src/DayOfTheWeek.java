@@ -20,6 +20,7 @@ public class DayOfTheWeek {
 		
 		String[] weeks = {"SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY",
 		                  "SATURDAY"};
+		
 		System.out.println(weeks[cal.get(Calendar.DAY_OF_WEEK)-1]);
 		
 
