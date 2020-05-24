@@ -8,7 +8,7 @@ import java.util.*;
 
 public class VirusThreat {
 		
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException, Exception {
 		
 		List<DistrictWise> DistrictwiseList = new ArrayList<DistrictWise>();
 		
@@ -84,7 +84,7 @@ public class VirusThreat {
 		String dburl = "jdbc:mysql://localhost:3306/virus";
 		String user = "student";
 		String pass = "student";
-		
+		Class.forName("com.mysql.jdbc.Driver");//class forname
 		try {
 			// Get a connection to database
 			myConn = DriverManager.getConnection(dburl, user, pass);
@@ -97,7 +97,6 @@ public class VirusThreat {
 			
 			String sql = "Select * From corona";
 			myRs = myStmt.executeQuery(sql);
-			
 			
 			while (myRs.next()) {
 				DistrictWise infected = new DistrictWise();
@@ -153,4 +152,22 @@ public class VirusThreat {
 			
 	}
 }
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
