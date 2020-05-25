@@ -24,10 +24,10 @@ public class StudentDetails {
 			Connection con = DriverManager.getConnection(url,uname,pass);
 			st = con.createStatement();
 			rs = st.executeQuery(query);
-			
+			Student s = new Student();
 			while(rs.next()) {
 				
-				Student s = new Student();
+				
 				s.setFirstname(rs.getString("firstname"));
 				s.setLastname(rs.getString("lastname"));
 				s.setAge(rs.getInt("age"));

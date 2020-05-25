@@ -8,9 +8,26 @@ import java.util.*;
 
 public class VirusThreat {
 		
+	public static int totalCount;
+	public static int totalFemaleCount;
+	public static int totalMaleCount;
+	
+	public static int tnMaleCount;
+	public static int tnFemaleCount;
+	public static int tnTotalCount;
+	
+	public static int apMaleCount;
+	public static int apFemaleCount;
+	public static int apTotalCount;
+
+	public static int keralaMaleCount;
+	public static int keralaFemaleCount;
+	public static int keralaTotalCount;
+
+	public static List<DistrictWise> DistrictwiseList = new ArrayList<DistrictWise>();
+	
 	public static void main(String[] args) throws SQLException, Exception {
 		
-		List<DistrictWise> DistrictwiseList = new ArrayList<DistrictWise>();
 		
 		
 		
@@ -105,46 +122,55 @@ public class VirusThreat {
 				infected.setFemale(myRs.getInt("female"));
 				DistrictwiseList.add(infected);
 				}
-			//DistrictwiseList.forEach(item->System.out.println(item));
-			
-			Map<String, Integer> maleList = DistrictwiseList.stream().collect(
-				    Collectors.groupingBy(DistrictWise::getState, Collectors.summingInt(DistrictWise::getMale)));
 
-			Map<String, Integer> femaleList = DistrictwiseList.stream().collect(
-				    Collectors.groupingBy(DistrictWise::getState, Collectors.summingInt(DistrictWise::getFemale)));
-			
-			//Total Females
-			
-			System.out.println("Total female patients in different states: \n");
-			
-			femaleList.forEach((k, v) -> System.out.println(k + " female patients: "+ v));
-			
-			//Total males
-			
-			System.out.println("\nTotal male patients in different states: \n");
-			
-			maleList.forEach((k, v) -> System.out.println(k + " male patients: " + v));
-			
-			//Total Patients in Different states
-			
-			maleList.forEach((key, value) -> femaleList.merge(key, value, (v1, v2) -> v1.equals(v2) ? v1 : v1 + v2 ));
+			Iterator iterator = DistrictwiseList.iterator();
+			while(iterator.hasNext()) {
+				DistrictWise bean = (DistrictWise)iterator.next();
+				totalCount = totalCount + bean.getFemale() + bean.getMale();
+				totalFemaleCount  =  totalFemaleCount + bean.getFemale();
+				totalMaleCount  =  totalMaleCount + bean.getMale();
+				
+				
+				if(bean.getState()=="Tamilnadu" || bean.getState().equals("Tamilnadu")) {
+					tnTotalCount = tnTotalCount + bean.getFemale() + bean.getMale();
+					tnMaleCount = tnMaleCount + bean.getMale();
+					tnFemaleCount = tnFemaleCount + bean.getFemale();
+				} else if(bean.getState()=="AP" || bean.getState().equals("AP")) {
+					apTotalCount = apTotalCount + bean.getFemale() + bean.getMale();
+					apMaleCount = apMaleCount + bean.getMale();
+					apFemaleCount = apFemaleCount + bean.getFemale();
 
-			System.out.println("\nTotal patients in different states: \n");
-			
-			femaleList.forEach((k, v) -> System.out.println(k + "total patients: "+ v));
-			
-			// Total Infected People 
-			
-						Integer totalMale = 0, totalFemale = 0;
-						Integer Total = 0;
-						
-							for(DistrictWise i: DistrictwiseList) {
-								totalMale += i.getMale();
-								totalFemale += i.getFemale();
-							}
-							Total = totalMale + totalFemale;
-							System.out.println("\nTotal Number of Patients: " + Total);    
+				} else if(bean.getState()=="Kerala" || bean.getState().equals("Kerala")) {
+					keralaTotalCount = keralaTotalCount + bean.getFemale() + bean.getMale();
+					keralaMaleCount = keralaMaleCount + bean.getMale();
+					keralaFemaleCount = keralaFemaleCount + bean.getFemale();
 
+				}
+			}
+			
+			System.out.println("Total count is: " + totalCount );
+			System.out.println("Total female count is: " + totalFemaleCount );
+			System.out.println("Total male count is: " + totalMaleCount );
+			
+			System.out.println("TamilNadu Total Cases\n");
+			
+			System.out.println("Total tn count is: " + tnTotalCount );
+			System.out.println("Total tn female count is: " + tnFemaleCount );
+			System.out.println("Total tn male count is: " +  tnMaleCount);
+			
+			System.out.println("AP Total Cases\n");
+			
+			System.out.println("Total ap count is: " + apTotalCount );
+			System.out.println("Total ap female count is: " + apFemaleCount );
+			System.out.println("Total ap male count is: " +  apMaleCount);
+			
+			System.out.println("Kerala Total Cases\n");
+			
+			System.out.println("Total kerala count is: " + keralaTotalCount );
+			System.out.println("Total kerala female count is: " + keralaFemaleCount );
+			System.out.println("Total kerala male count is: " +  keralaMaleCount);
+			
+			
 		} catch (Exception e) {
 			System.err.println("Got an exception! ");
 			System.err.println(e.getMessage());
