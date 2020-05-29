@@ -34,12 +34,14 @@ public class StringWeight {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		int val = sc.nextInt();	
+		
 	
 		String st = " ";
 		 
 		st= sc.next();
-		st +=sc.nextLine();
+		st +=sc.next();
+		
+		int val = sc.nextInt();	
 	    sc.close();
 
 		String resultStr="";  
