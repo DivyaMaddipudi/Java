@@ -9,6 +9,7 @@ public class SubStringComparision {
 		
 		for (int i = k; i < s.length(); i++) {
 			currStr = currStr.substring(1, k) + s.charAt(i);
+			//System.out.println(currStr);
 			if (lexMax.compareTo(currStr) < 0)
 				lexMax = currStr;
 			if (lexMin.compareTo(currStr) > 0)
