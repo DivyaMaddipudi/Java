@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 class Employee {
-	public String firstName;
+	private String firstName;
 	private String lastName;
 	private String mobileNo;
 	
@@ -55,19 +55,9 @@ public class example {
             Employee emp = (Employee)itr.next(); 
             System.out.println(emp.getFirstName());  
         }
-		
-		
-        /*
-         * Collections.sort(emp_list,new NameComparator());
-         * 
-        Iterator itr= emp_list.iterator();  
-        while(itr.hasNext()){  
-            Employee emp = (Employee)itr.next();  
-            System.out.println(emp.FirstName);  
-         */
-        }
+    }
 
-	}
+}
 class sortByfirstName implements Comparator {
 
 	@Override
@@ -75,7 +65,7 @@ class sortByfirstName implements Comparator {
 		Employee e1=(Employee)o1;  
         Employee e2=(Employee)o2;  
   
-        return e1.firstName.compareTo(e2.firstName);  
+        return e1.getFirstName().compareTo(e2.getFirstName());  
 	}
 	
 }
