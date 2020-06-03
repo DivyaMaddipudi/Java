@@ -55,7 +55,6 @@ public class StringWeight {
 		}  
 		String str = resultStr.toUpperCase();
 		
-		
 		int weight = weightValue(str, val);
 		System.out.println(weight);
 		

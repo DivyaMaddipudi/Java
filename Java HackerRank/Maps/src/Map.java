@@ -1,7 +1,9 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.List;
+import java.util.Map.Entry;
 
 class Employee {
 	private String name;
@@ -37,24 +39,28 @@ public class Map {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		List<Employee> emplis = new ArrayList<Employee>();
-		String data;
+		String s = sc.next();
+		s = s + sc.nextLine();
 		
-		while((data = sc.nextLine()).length()>0) {
-			String[] arr = data.split(",");
-			if(arr.length != 2 || arr[0].length() == 0 || arr[1].length() == 0) {
-				System.out.println("Invalid");
-			} else {
-				Employee emp = new Employee(arr[0], arr[1]);
-				emplis.add(emp);
-			}
+		String[] p = s.split(" ");
+		
+		int i = sc.nextInt();
+		HashMap<Integer, String> hm = new HashMap<Integer, String>();
+		
+		System.out.println(s);
+		System.out.println(i);
+		for(int i1=0;i1<p.length;i1++) {
+			System.out.println(p[i1].toUpperCase());
 		}
-		Iterator it =  emplis.iterator();
-		while(it.hasNext()) {
-			Employee emp = (Employee)it.next();
-			System.out.println(emp.getName() + emp.getNo());
-		}
-
+		/*for(int i =0; i<4;i++) {
+			int a = sc.nextInt();
+			String b = sc.next();
+			hm.put(a, b);
+		}*/
+		
+		
+		//for(Entry<Integer, String> m:hm.entrySet()) {
+			//System.out.println(m.getKey() + m.getValue());
+		//}
 	}
-
 }
