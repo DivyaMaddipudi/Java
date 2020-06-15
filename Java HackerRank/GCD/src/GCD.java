@@ -11,6 +11,12 @@ public class GCD {
 		int num1 = sc.nextInt();
 		int num2 = sc.nextInt();
 		
+		GCD obj = new GCD();
+		System.out.println(obj.gcd(num1,num2));
+		
+	}
+	
+	public Integer gcd(int num1,int num2) {
 		while(num1 != num2) {
 			if(num1 > num2) {
 				num1 = num1 - num2;
@@ -19,8 +25,7 @@ public class GCD {
 			}
 			
 		}
-		System.out.println(num2);
-		
+		return num2;
 		
 	}
 }
