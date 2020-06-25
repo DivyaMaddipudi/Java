@@ -12,7 +12,7 @@ public class JdbcInsertDemo {
 		Statement myStmt = null;
 		ResultSet myRs = null;
 		
-		String dburl = "jdbc:mysql://localhost:3306/demo";
+		String dburl = "jdbc:mysql://localhost:3306/virus";
 		String user = "student";
 		String pass = "student";
 		
@@ -22,23 +22,19 @@ public class JdbcInsertDemo {
 			
 			myStmt = myConn.createStatement();
 			
-			// Inserting a row into db
+		// Inserting a row into db
 			
-			// int rowsAffected = myStmt.executeUpdate("insert into employees " +
-			// "(last_name, first_name, email, department, salary) " +  "values" + 
-			//	"('Bannu', 'Appari', 'bannu@gmail', 'cse', 55000.00)");
-			
-			
-			//Updating
-			int rowsAffected = myStmt.executeUpdate("update employees " + 
-								"set email = 'bannu@gmail.com' " + 
-					 			"where last_name='Bannu' and first_name='Appari' ");
+		 int rowsAffected = myStmt.executeUpdate("insert into details " +
+			 "(state, male, female, total) " +  "values" + 
+			"('Hyderabad', 150, 100, 250)");
 			
 			
-			myRs = myStmt.executeQuery("select * from employees where last_name = 'Bannu");
+			String sql = "Select * From details";
+			myRs = myStmt.executeQuery(sql);
+			
 			
 			while (myRs.next()) {
-				System.out.println(myRs.getString("last_name") + ", " + myRs.getString("email"));
+				System.out.println(myRs.getString("state") + ", " + myRs.getString("male") + ", " + myRs.getString("female") + ", " + myRs.getString("total"));
 		}
 	}
 		catch (Exception exc) {

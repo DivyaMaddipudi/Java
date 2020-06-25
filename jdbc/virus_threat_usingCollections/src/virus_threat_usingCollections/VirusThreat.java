@@ -1,7 +1,6 @@
 package virus_threat_usingCollections;
 
 import java.sql.*;
-import java.util.stream.Collectors;
 import java.util.*;
 
 
@@ -12,17 +11,10 @@ public class VirusThreat {
 	public static int totalFemaleCount;
 	public static int totalMaleCount;
 	
-	public static int tnMaleCount;
-	public static int tnFemaleCount;
-	public static int tnTotalCount;
-	
-	public static int apMaleCount;
-	public static int apFemaleCount;
-	public static int apTotalCount;
 
-	public static int keralaMaleCount;
-	public static int keralaFemaleCount;
-	public static int keralaTotalCount;
+	public static int mumbaiMaleCount;
+	public static int mumbaiFemaleCount;
+	public static int mumbaiTotalCount;
 
 	public static List<DistrictWise> DistrictwiseList = new ArrayList<DistrictWise>();
 	
@@ -112,9 +104,15 @@ public class VirusThreat {
 			
 			myStmt = myConn.createStatement();
 			
+			int rowsAffected = myStmt.executeUpdate("insert into corona " +
+					"(state, city, male, female) " +  "values" + 
+					"('Mumbai', 'MH', 100, 150)");
+			
 			String sql = "Select * From corona";
 			myRs = myStmt.executeQuery(sql);
 			
+			
+					
 			while (myRs.next()) {
 				DistrictWise infected = new DistrictWise();
 				infected.setState(myRs.getString("state"));
@@ -124,6 +122,7 @@ public class VirusThreat {
 				}
 
 			Iterator iterator = DistrictwiseList.iterator();
+			
 			while(iterator.hasNext()) {
 				DistrictWise bean = (DistrictWise)iterator.next();
 				totalCount = totalCount + bean.getFemale() + bean.getMale();
@@ -131,20 +130,10 @@ public class VirusThreat {
 				totalMaleCount  =  totalMaleCount + bean.getMale();
 				
 				
-				if(bean.getState()=="Tamilnadu" || bean.getState().equals("Tamilnadu")) {
-					tnTotalCount = tnTotalCount + bean.getFemale() + bean.getMale();
-					tnMaleCount = tnMaleCount + bean.getMale();
-					tnFemaleCount = tnFemaleCount + bean.getFemale();
-				} else if(bean.getState()=="AP" || bean.getState().equals("AP")) {
-					apTotalCount = apTotalCount + bean.getFemale() + bean.getMale();
-					apMaleCount = apMaleCount + bean.getMale();
-					apFemaleCount = apFemaleCount + bean.getFemale();
-
-				} else if(bean.getState()=="Kerala" || bean.getState().equals("Kerala")) {
-					keralaTotalCount = keralaTotalCount + bean.getFemale() + bean.getMale();
-					keralaMaleCount = keralaMaleCount + bean.getMale();
-					keralaFemaleCount = keralaFemaleCount + bean.getFemale();
-
+			  if(bean.getState()=="Mumbai" || bean.getState().equals("Mumbai")) {
+					mumbaiTotalCount = mumbaiTotalCount + bean.getFemale() + bean.getMale();
+					mumbaiMaleCount = mumbaiMaleCount + bean.getMale();
+					mumbaiFemaleCount = mumbaiFemaleCount + bean.getFemale();
 				}
 			}
 			
@@ -152,23 +141,11 @@ public class VirusThreat {
 			System.out.println("Total female count is: " + totalFemaleCount );
 			System.out.println("Total male count is: " + totalMaleCount );
 			
-			System.out.println("TamilNadu Total Cases\n");
+			System.out.println("Mumbai Total Cases\n");
 			
-			System.out.println("Total tn count is: " + tnTotalCount );
-			System.out.println("Total tn female count is: " + tnFemaleCount );
-			System.out.println("Total tn male count is: " +  tnMaleCount);
-			
-			System.out.println("AP Total Cases\n");
-			
-			System.out.println("Total ap count is: " + apTotalCount );
-			System.out.println("Total ap female count is: " + apFemaleCount );
-			System.out.println("Total ap male count is: " +  apMaleCount);
-			
-			System.out.println("Kerala Total Cases\n");
-			
-			System.out.println("Total kerala count is: " + keralaTotalCount );
-			System.out.println("Total kerala female count is: " + keralaFemaleCount );
-			System.out.println("Total kerala male count is: " +  keralaMaleCount);
+			System.out.println("Total mumbai count is: " + mumbaiTotalCount );
+			System.out.println("Total mumbai female count is: " + mumbaiFemaleCount );
+			System.out.println("Total mumbai male count is: " +  mumbaiMaleCount);
 			
 			
 		} catch (Exception e) {
