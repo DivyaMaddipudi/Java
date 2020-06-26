@@ -1,56 +1,72 @@
-import java.util.Scanner;
+/*
+ * Array Rotation ------ Rotates Array N given times
+ * 
+ * ex:
+ *  input:   1 2 3 4 5 and 2 times(right rotation)
+ * 	output:  4 5 1 2 3	
+ * 
+ * 
+ */
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
 
 public class ArrayRotation {
 	
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int testCases = sc.nextInt();
-		while(testCases > 0) {
-			
+	public static void main(String[] args) throws NumberFormatException, IOException {
 		
-		int size = sc.nextInt();
+        //BufferedReader
+     
+        BufferedReader sc = new 
+        BufferedReader(new InputStreamReader(System.in));
+        
+
+        int testCases = Integer.parseInt(sc.readLine());
+
+		while(testCases > 0) {	
 		
-		int rot = sc.nextInt();
+		String s[]=sc.readLine().split(" "); 
+		
+		int size =Integer.parseInt(s[0]);
+
+		int rot =Integer.parseInt(s[1]);
+		
+		rot = rot%size;	
 		
 		int[] arr = new int[size];
 		
-		if(rot > size) {
-			rot = rot%size;
-			
+		
+		String line = sc.readLine(); 
+		String[] strs = line.trim().split("\\s+");
+		for (int i = 0; i < size; i++) {
+		    arr[i]  = Integer.parseInt(strs[i]);
 		}
-		System.out.println(rot);
+
+
+		while(rot > 0) {	
+		int temp = arr[size - 1];
 		
-		for(int i=0;i<arr.length;i++) {
-			arr[i] = sc.nextInt();
-			
-		}
-		
-		
-		
-		for(int j=0;j<rot;j++) {
-	
-		int len = arr.length - 1;
-		
-		int temp = arr[len];
-		
-		for(int i= len;i>0;i--) {
+		for(int i= size - 1;i>0;i--) {
 			
 			arr[i] = arr[i-1];
 			
 		}
 		arr[0] = temp;
+        rot--;
 		
 	}
 		
 		for(int i1=0;i1<size;i1++) {
 			System.out.print(arr[i1] + " ");
-			
 		}
+		System.out.println();
 		testCases --;
 		}
 		
 	}
 
 }
+
 
 
