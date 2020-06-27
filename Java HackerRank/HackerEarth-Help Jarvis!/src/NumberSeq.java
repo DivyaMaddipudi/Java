@@ -7,31 +7,62 @@ import java.util.*;
 import java.util.Arrays; 
 class NumberSeq {
 	
+	public static int isConsecutive(String str) 
+	{ 
+	     
+	    int start; 
+	  
+	     
+	    int length = str.length(); 
+	  
+	    
+	    for (int i = 0; i < length / 2; i++)  
+	    { 
+	  
+	        String new_str = str.substring(0, i + 1); 
+	  
+	        
+	        int num = Integer.parseInt(new_str); 
+	  
+	         
+	        start = num; 
+	        while (new_str.length() < length)  
+	        { 
+	   
+	        	num++;           
+	            new_str = new_str + String.valueOf(num); 
+	        } 
+	  
+	        if (new_str.equals(str))  
+	        return start; 
+	    } 
+	  
+	    return -1; 
+	} 
+	  
+	
     public static void main(String args[] ) throws Exception {
         Scanner s = new Scanner(System.in);
 
         int cases = s.nextInt();
-        int count = 0;
+   
         for(int i=0;i<cases;i++) {
-            int n = s.nextInt();
+            long n = s.nextLong();
 
-            String str= Integer.toString(n);
+            String str= Long.toString(n);
             char arr[] = str.toCharArray(); 
-             
-            Arrays.sort(arr); 
-            count = 0;
-            for(int j=0;j<(arr.length-1);j++) {
-            
-            	if(arr[j] + 1 == arr[j+1]) {
-            		count = count + 1;
-            	} 
-            }
-            if(count == (arr.length - 1)) {
-            	System.out.println("Yes");
-            } else {
-            	System.out.println("No");
-            }
+          
+            Arrays.sort(arr);
+            String res = String.valueOf(arr);
+            int start = isConsecutive(res); 
+            if (start != -1) 
+                System.out.println("Yes" ); 
+            else
+                System.out.println("No"); 
 
+            
+            
+            
         }
 
     }
