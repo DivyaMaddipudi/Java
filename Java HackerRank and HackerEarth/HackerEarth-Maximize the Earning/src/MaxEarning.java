@@ -12,7 +12,6 @@
 	6
 	-------
 	60
-	
  * There are two streets in the city.
 
 	The first street has 6 buildings and the earning of Napoleon for communicating with each building is 3 Rs..
