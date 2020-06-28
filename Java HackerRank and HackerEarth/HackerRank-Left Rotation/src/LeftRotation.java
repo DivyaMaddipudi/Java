@@ -1,3 +1,12 @@
+/*
+ * 
+ * input:
+ * 		5 2
+ * 		1 2 3 4 5
+ * output:
+ * 		3 4 5 1 2
+ */
+
 import java.io.*;
 import java.math.*;
 import java.security.*;
