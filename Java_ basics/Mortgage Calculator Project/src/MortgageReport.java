@@ -17,7 +17,6 @@ public class MortgageReport {
 		
 		System.out.println("Mortgage");
 		System.out.println("---------");
-
 		System.out.println(mortgageValue);
 	}
 	

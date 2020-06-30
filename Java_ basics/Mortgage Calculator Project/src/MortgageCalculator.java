@@ -15,7 +15,6 @@ public class MortgageCalculator {
 		return balances;
 	}
 	
-
 	public MortgageCalculator(int principal, double rateAnnualy, int years) {
 		super();
 		this.principal = principal;
@@ -51,5 +50,4 @@ public class MortgageCalculator {
 	private double getMonthlyRate() {
 		return rateAnnualy/MortgageCalculator.PERCENT/MortgageCalculator.MONTH_IN_YEARS;
 	}
-
 }
