@@ -66,8 +66,8 @@ public class SiteController extends HttpServlet {
 			newSession.setAttribute("username", username);
 //			Cookie cUsername = new Cookie("username", username);
 //			response.addCookie(cUsername);
-
-			response.sendRedirect(request.getContextPath()+"/MemberAreaController?action=memberArea");
+			String encode = response.encodeURL(request.getContextPath());
+			response.sendRedirect(encode+"/MemberAreaController?action=memberArea");
 		} else {
 			response.sendRedirect(request.getContextPath() + "/SiteController?action=login");
 			
