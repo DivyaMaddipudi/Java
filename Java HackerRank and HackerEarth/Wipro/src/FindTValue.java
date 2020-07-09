@@ -5,6 +5,7 @@ Danielle was assigned the task of finding the T-Value by her Manager. She was
 given a function called find_tvalue and was provided with 3 integer numbers
 input1, input2 and input3. She is expected to return an integer value by following
 the two rules:
+
 Rule_1: There are four cases possible based on the value of input2.
 	Case 1:
 		if input2 is an even prime number then
@@ -117,6 +118,7 @@ public class FindTValue {
 		}
 		return sum;
 	}
+	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int inp1 = sc.nextInt();
