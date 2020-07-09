@@ -1,16 +1,14 @@
 package org.divya.servlets;
 
-
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MemberAreaController
+ * Servlet implementation class MemberArearController
  */
 @WebServlet("/MemberAreaController")
 public class MemberAreaController extends HttpServlet {
@@ -28,13 +26,12 @@ public class MemberAreaController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
 		String action = request.getParameter("action");
-		
+
 		switch(action) {
 		case "destroy":
 			request.getSession().invalidate();
-			response.sendRedirect(request.getContextPath() + "/SiteController?action=login");
+			response.sendRedirect(request.getContextPath()+"/Controller?action=login");
 			break;
 		case "memberArea":
 			request.getRequestDispatcher("memberArea.jsp").forward(request, response);

@@ -9,19 +9,18 @@
 <body>
 	<%
 		String username = null, sessionID = null;
-		
+
 		username = request.getSession().getAttribute("username").toString();
 		sessionID = request.getSession().getId();
-	
-		
 	%>
-	Username: <%=username%><br/> 
-	Current session: <%=sessionID%>	<br/> 
-	Member Area!!
-	
+	Username:
+	<%=username%><br /> Current session:
+	<%=sessionID%>
+	<br /> Member Area!!
+
 	<form action="<%=request.getContextPath()%>/MemberAreaController" method="get">
-	<input type="hidden" name="action" value="destroy">
-	<input type="submit" value="logout">
+		<input type="hidden" name="action" value="destroy"> 
+		<input type="submit" value="logout">
 	</form>
 </body>
 </html>
