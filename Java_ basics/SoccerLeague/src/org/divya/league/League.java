@@ -49,6 +49,7 @@ public class League {
  		
  		System.out.print("The player " + currGame.goals[0].thePlayer.playerName + " of "
  				+ currGame.goals[0].theTeam.teamName + " goals in " + currGame.goals[0].theTime + " ms");
+ 		
  		System.out.println();
  		
  		System.out.println("Winning Team :");
