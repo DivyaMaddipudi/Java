@@ -5,7 +5,6 @@ import java.io.*;
 public class BinarySearchTree {
 	
 	 static Node root;
-	 public String Marker = "-1";
 	
 	 @SuppressWarnings("resource")
 	void serialize(Node node, String path) throws IOException { 
@@ -15,15 +14,14 @@ public class BinarySearchTree {
 
 		 
 		 if (node == null) {
-			fw.write(Marker);
+			fw.write("-1");
 		 	return;
 		 }
 	    // Else, store current node and recur for its children 
 		 else {
-		    fw.write(String.valueOf(node.key)+ " "); 
-		    
-		    System.out.println(node.key);
+			fw.write(String.valueOf(node.key)+ " ");
 		    serialize(node.left, path); 
+		    
 		    serialize(node.right, path); 
 		    
 		 }
@@ -35,6 +33,7 @@ public class BinarySearchTree {
 	{ 
 		if (node == null) 
 			return; 
+		
 		printInorder(node.left); 
 		System.out.print(node.key + " "); 
 		printInorder(node.right); 
@@ -57,7 +56,7 @@ public class BinarySearchTree {
         String path = fp.getPath();
         
        tree.serialize(root, path); 
-        //tree.printInorder(root);
+        tree.printInorder(root);
         
       
         // Let us deserialize the storeed tree into root1 
