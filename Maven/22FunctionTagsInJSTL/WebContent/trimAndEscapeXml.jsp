@@ -12,7 +12,6 @@
 <body>
 ${fn:trim("   satya divya   ") }
 
-
 <h1> EscapeXML Demo </h1>
 ${fn:escapeXml( "<h1> EscapeXML Demo </h1>" ) }
 
