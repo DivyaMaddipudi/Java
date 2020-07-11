@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Users>
+	<User>
+		<name> Divya</name>
+		<gender> Female </gender>
+		<age> 21 </age>
+	</User>
+	
+	<User>
+		<name> Riya </name>
+		<gender> Female </gender>
+		<age> 30 </age>
+	</User>
+	
+	<User>
+		<name> Ram </name>
+		<gender> Male </gender>
+		<age> 40 </age>
+	</User>
+	
+	<User>
+		<name> Sri </name>
+		<gender> Male </gender>
+		<age> 45 </age>
+	</User>
+	
+	
+</Users>
