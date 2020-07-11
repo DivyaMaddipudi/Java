@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="24I18N">
+        
+    <wb-module deploy-name="24i18N">
+                
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="24I18N"/>
-        <property name="java-output-path" value="/24I18N/build/classes"/>
+                
+        <property name="java-output-path" value="/24i18N/build/classes"/>
+        <property name="context-root" value="24i18N"/>
+            
     </wb-module>
+    
 </project-modules>
