@@ -33,7 +33,7 @@ public class OperationController extends HttpServlet {
 			listUsers(request, response);
 			break;
 		case "addusers":
-			addUsers(request, response);
+			addUserFormLoader(request, response);
 			break;
 		default:
 			errorPage(request, response);
@@ -53,7 +53,7 @@ public class OperationController extends HttpServlet {
 		User newUser = new User(request.getParameter("username"), request.getParameter("email"));
 		addUserOperation(newUser);
 		listUsers(request, response);
-			
+		break;
 		default:
 			errorPage(request, response);
 			break;
@@ -63,7 +63,7 @@ public class OperationController extends HttpServlet {
 	}
 	
 	public void addUserOperation(User newUser) {
-		new UsersModel().addUser(newUser);
+		new UsersModel().addUser(dataSource, newUser);
 		return;
 		
 	}
@@ -77,7 +77,7 @@ public class OperationController extends HttpServlet {
 		
 	}
 	
-	public void addUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void addUserFormLoader(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("title", "add users");
 		request.getRequestDispatcher("addUsers.jsp").forward(request, response);
 	}

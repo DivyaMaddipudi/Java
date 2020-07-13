@@ -1,6 +1,7 @@
 package org.divya.model;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -37,8 +38,24 @@ public class UsersModel {
 		return listUser;
 	}
 
-	public void addUser(User newUser) {
-		
+	public boolean addUser(DataSource dataSource, User newUser) {
+		Connection conn = null;
+		PreparedStatement mySt = null;
+		try {
+			conn = dataSource.getConnection();
+			String username = newUser.getUsername();
+			String email = newUser.getEmail();
+			String query = "insert into users (username, email) values (?, ?)";
+			mySt = conn.prepareStatement(query);
+			mySt.setString(1, username);
+			mySt.setString(2, email);
+			return mySt.execute();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return false;
+		}
 		
 	}
 
