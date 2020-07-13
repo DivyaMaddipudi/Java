@@ -13,6 +13,16 @@ public class User {
 		this.email = email;
 	}
 	
+	
+	
+	public User(String username, String email) {
+		super();
+		this.username = username;
+		this.email = email;
+	}
+
+
+
 	public int getUsers_id() {
 		return users_id;
 	}

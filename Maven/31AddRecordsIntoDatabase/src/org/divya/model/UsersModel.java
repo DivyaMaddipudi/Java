@@ -37,4 +37,10 @@ public class UsersModel {
 		return listUser;
 	}
 
+	public void addUser(User newUser) {
+		
+		
+	}
+
+
 }

@@ -2,7 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Solid - Bootstrap Business Template</title>
+  <title><%
+  if(request.getAttribute("title") == null) {
+	  out.print("Home Page");
+  } else {
+	  out.print(request.getAttribute("title"));
+  }  
+  %></title>  
+
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
@@ -45,13 +52,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/home?page=home">Welcome.</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/site?page=home">Welcome.</a>
       </div>
       <div class="navbar-collapse collapse navbar-right">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="${pageContext.request.contextPath}/home?page=home">HOME</a></li>
-          <li><a href="${pageContext.request.contextPath}/home?page=listusers">List User</a></li>
-          <li><a href="${pageContext.request.contextPath}/home?page=addusers">Add User</a></li>
+          <li class="active"><a href="${pageContext.request.contextPath}/site?page=home">HOME</a></li>
+          <li><a href="${pageContext.request.contextPath}/operation?page=listusers">List User</a></li>
+          <li><a href="${pageContext.request.contextPath}/operation?page=addusers">Add User</a></li>
           
         </ul>
       </div>
