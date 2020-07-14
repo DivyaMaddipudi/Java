@@ -32,3 +32,69 @@ In head:
 <script src="webjars/bootstrap/3.3.6/css/bootstrap.min.css"></script>
 
 </body>
+
+Handling Cookie:
+
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("username")) {
+					username = cookie.getValue();
+
+				}
+
+				if (cookie.getName().equals("JSESSIONID")) {
+					sessionID = cookie.getValue();
+
+				}
+			}
+		}
+
+		if(sessionID == null || username == null){
+			response.sendRedirect("login.jsp");
+		}
+		
+Controller:
+			//To destroy the cookie
+			Cookie[] cookies = request.getCookies();
+			for(Cookie cookie: cookies) {
+				if(cookie.getName().equals("username")) {
+					cookie.setValue(null);
+					cookie.setMaxAge(0);
+					response.addCookie(cookie);
+				}
+			}
+
+-----------------------			
+Links:
+------------------------
+JSTL Tags:
+Core, XML, I18N, DATABASE, FUNCTIONS
+https://studyeasy.org/jstl/jstl-taglibs/
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
+
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+ 
+
+Implicit Objects:
+https://studyeasy.org/general/implicit-objects/
+
+context.xml in META-INF File
+
+<Context>
+ 
+  <Resource name="jdbc/project" 
+  
+  			   auth="Container" type="javax.sql.DataSource"
+               maxActive="25" maxIdle="5" maxWait="10000"
+               username="student" password="student" 
+               driverClassName="com.mysql.cj.jdbc.Driver"
+               
+               url="jdbc:mysql://127.0.0.1:3306/website?useSSL=false"/>
+ 
+</Context>
+
