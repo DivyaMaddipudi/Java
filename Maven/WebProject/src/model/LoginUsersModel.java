@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -36,8 +37,8 @@ public class LoginUsersModel {
 		}
 	}
 	
-	public List<LoginUsers> listUser(DataSource dataSource) {
-		List<LoginUsers> listUser = new ArrayList<>();
+	public HashMap<String, String> listUser(DataSource dataSource) {
+		HashMap<String, String> userMap = new HashMap<>();
 		Connection connect = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -45,18 +46,18 @@ public class LoginUsersModel {
 		try {
 			connect = dataSource.getConnection();
 
-			String query = "select * from loginusers";
+			String query = "select email, password from loginusers";
 			stmt = connect.createStatement();
 
 			rs = stmt.executeQuery(query);
 			while(rs.next()) {
-				listUser.add(new LoginUsers(rs.getInt("users_id"), rs.getString("name"), rs.getString("email"), rs.getString("password")));
+				userMap.put(rs.getString("email"), rs.getString("password"));
 			}
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
-		return listUser;
+		return userMap;
 
 	}
 }

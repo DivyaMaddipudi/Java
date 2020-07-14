@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -84,24 +85,30 @@ public class HomeController extends HttpServlet {
 			return;
 		}
 	
+	//authenticating logging user
 	private void authenticateLoginUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		List<LoginUsers> listUsers = new ArrayList<>();
-		listUsers = new LoginUsersModel().listUser(dataSource);	
+		if(isExistingUser(email, password)) {
+			request.getRequestDispatcher("welcome.jsp").forward(request, response);
+		}else {
+			request.setAttribute("successMessage", "Invalid email_Id or password");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}	
+	}
+	
+	private boolean isExistingUser(String email, String password) {
+		HashMap<String, String> userMap = new HashMap<>();
+		userMap = new LoginUsersModel().listUser(dataSource);	
 		
-		for(int i=0;i<listUsers.size();i++) {
-			if(listUsers.get(i).getEmail().contains(email) && listUsers.get(i).getPassword().contains(password)) {
-				
-				System.out.println("userfound");
-				request.getRequestDispatcher("welcome.jsp").forward(request, response);
-			} else {
-				System.out.println("user notfound");
-				request.setAttribute("successMessage", "Invalid email_Id or password");
-				request.getRequestDispatcher("login.jsp").forward(request, response);
-			}
+		boolean isUserExist = false;
+		if(userMap.containsKey(email) && userMap.get(email).equals(password)) {
+				isUserExist = true;
+		} else {
+			isUserExist = false;
 		}
+		return isUserExist;
 	}
 	
 	
