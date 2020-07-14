@@ -41,21 +41,12 @@ public class HomeController extends HttpServlet {
 		
 		switch(action) {
 		case "signupsubmit":
-			String password = request.getParameter("password");
-			String re_password = request.getParameter("re_password");
-			if(password.equals(re_password)) {
-				LoginUsers newUser = new LoginUsers(request.getParameter("name"), request.getParameter("email"), request.getParameter("password"));
-				addUser(newUser);
-				response.getWriter().print("User Added!!");
-			} else {
-				
-			}
-			
+			checkPassword(request, response);
 			break;
 			
 		case "loginsubmit":
 			request.setAttribute("title", "Login page");
-			authenticateUser(request, response);
+			authenticateLoginUser(request, response);
 			break;		
 			
 		default:
@@ -65,12 +56,34 @@ public class HomeController extends HttpServlet {
 		}
 	}
 	
-	private void addUser(LoginUsers newUser) {
-		new LoginUsersModel().addUser(dataSource, newUser);
-		return;
-	}
+	// checks password and re_password are same or not!
+	private void checkPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	private void authenticateUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		String re_password = request.getParameter("re_password");
+		
+		if(password.equals(re_password)) {
+			LoginUsers newUser = new LoginUsers(request.getParameter("name"), email, password);
+			addUser(newUser);
+			request.setAttribute("successMessage", "Now you can login to the account...");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		} else {
+			
+			request.setAttribute("errorMessage", "Password must be same...!");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+			
+		}
+		
+	}
+	
+	//adds user to the db
+	private void addUser(LoginUsers newUser) {
+			new LoginUsersModel().addUser(dataSource, newUser);
+			return;
+		}
+	
+	private void authenticateLoginUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
@@ -82,11 +95,11 @@ public class HomeController extends HttpServlet {
 			
 			HttpSession newSession = request.getSession(true);
 			newSession.setMaxInactiveInterval(300);
-			
 			newSession.setAttribute("username", email);
 			
 			request.getRequestDispatcher("welcome.jsp").forward(request, response);
 		} else {
+			request.setAttribute("successMessage", "Invalid email_Id or password");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 			
 		}

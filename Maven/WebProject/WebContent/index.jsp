@@ -8,6 +8,9 @@
                 
                     <form action="${pageContext.request.contextPath}/home" method="POST" id="signup-form" class="signup-form">
                         <h2 class="form-title">Create account</h2>
+                        
+                        <p><font color="red">${errorMessage}</font></p> 
+                        
                         <div class="form-group">
                             <input type="text" class="form-input" name="name" id="name" placeholder="Your Name" required="required"/>
                         </div>
