@@ -64,7 +64,9 @@ public class HomeController extends HttpServlet {
 		String password = request.getParameter("password");
 		String re_password = request.getParameter("re_password");
 		
-		if(password.equals(re_password)) {
+		
+		
+		if(password.equals(re_password) && (!isMailIdExist(email))) {
 			LoginUsers newUser = new LoginUsers(request.getParameter("name"), email, password);
 			addUser(newUser);
 			request.setAttribute("successMessage", "Now you can login to the account...");
@@ -72,7 +74,7 @@ public class HomeController extends HttpServlet {
 			
 		} else {
 			
-			request.setAttribute("errorMessage", "Password must be same...!");
+			request.setAttribute("errorMessage", "User Exists...! or Password must be same...!");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 			
 		}
@@ -84,6 +86,21 @@ public class HomeController extends HttpServlet {
 			new LoginUsersModel().addUser(dataSource, newUser);
 			return;
 		}
+	
+	//check whether mail id exist or not in signup page
+	private boolean isMailIdExist(String email) {
+		HashMap<String, String> userMap = new HashMap<>();
+		userMap = new LoginUsersModel().listUser(dataSource);	
+		
+		boolean isMailExist = false;
+		if(userMap.containsKey(email)) {
+			isMailExist = true;
+		} else {
+			isMailExist = false;
+		}
+		return isMailExist;
+	}
+	
 	
 	//authenticating logging user
 	private void authenticateLoginUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -98,6 +115,7 @@ public class HomeController extends HttpServlet {
 		}	
 	}
 	
+	//check user exist or not
 	private boolean isExistingUser(String email, String password) {
 		HashMap<String, String> userMap = new HashMap<>();
 		userMap = new LoginUsersModel().listUser(dataSource);	
