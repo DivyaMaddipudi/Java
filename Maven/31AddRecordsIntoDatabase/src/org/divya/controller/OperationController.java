@@ -71,6 +71,7 @@ public class OperationController extends HttpServlet {
 	public void listUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<User> listUser = new ArrayList<>();
 		listUser = new UsersModel().listUsers(dataSource);
+		
 		request.setAttribute("listUser", listUser);
 		request.setAttribute("title", "list of users");
 		request.getRequestDispatcher("listUsers.jsp").forward(request, response);

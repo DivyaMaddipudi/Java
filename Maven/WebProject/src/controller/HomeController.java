@@ -68,6 +68,7 @@ public class HomeController extends HttpServlet {
 			addUser(newUser);
 			request.setAttribute("successMessage", "Now you can login to the account...");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
+			
 		} else {
 			
 			request.setAttribute("errorMessage", "Password must be same...!");
@@ -87,21 +88,19 @@ public class HomeController extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
+		List<LoginUsers> listUsers = new ArrayList<>();
+		listUsers = new LoginUsersModel().listUser(dataSource);	
 		
-		boolean isUser = new LoginUsersModel().getUserDetails(dataSource, email, password);	
-		
-		if(isUser) {
-			request.getSession().invalidate();
-			
-			HttpSession newSession = request.getSession(true);
-			newSession.setMaxInactiveInterval(300);
-			newSession.setAttribute("username", email);
-			
-			request.getRequestDispatcher("welcome.jsp").forward(request, response);
-		} else {
-			request.setAttribute("successMessage", "Invalid email_Id or password");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
-			
+		for(int i=0;i<listUsers.size();i++) {
+			if(listUsers.get(i).getEmail().contains(email) && listUsers.get(i).getPassword().contains(password)) {
+				
+				System.out.println("userfound");
+				request.getRequestDispatcher("welcome.jsp").forward(request, response);
+			} else {
+				System.out.println("user notfound");
+				request.setAttribute("successMessage", "Invalid email_Id or password");
+				request.getRequestDispatcher("login.jsp").forward(request, response);
+			}
 		}
 	}
 	
@@ -110,6 +109,4 @@ public class HomeController extends HttpServlet {
 		request.setAttribute("title", "error Page");
 		request.getRequestDispatcher("error.jsp").forward(request, response);
 	}
-	
-
 }

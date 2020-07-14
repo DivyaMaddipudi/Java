@@ -36,38 +36,27 @@ public class LoginUsersModel {
 		}
 	}
 	
-	public boolean getUserDetails(DataSource dataSource, String email, String password) {
+	public List<LoginUsers> listUser(DataSource dataSource) {
+		List<LoginUsers> listUser = new ArrayList<>();
+		Connection connect = null;
+		Statement stmt = null;
+		ResultSet rs = null;
 
-		Connection conn = null;
-		Statement myStmt = null;
-		ResultSet myRs = null;
-		String dbEmail;
-		String dbPassword;
-		boolean isUser = false;
-		
 		try {
-			conn = dataSource.getConnection();
-			 
-			String query = "select email, password from loginusers";
-			
-			myStmt = conn.createStatement();
-			
-			myRs = myStmt.executeQuery(query);
+			connect = dataSource.getConnection();
 
-			if(myRs.next()) {
-				dbEmail = myRs.getString("email");
-				dbPassword = myRs.getString("password");
-				if(email.equals(dbEmail) && password.equals(dbPassword)) {
-					isUser = true;
-				} else {
-					isUser = false;
-				}	
-			}		
-			
+			String query = "select * from loginusers";
+			stmt = connect.createStatement();
+
+			rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				listUser.add(new LoginUsers(rs.getInt("users_id"), rs.getString("name"), rs.getString("email"), rs.getString("password")));
+			}
 		} catch (SQLException e) {
+
 			e.printStackTrace();
 		}
-		
-		return isUser;
+		return listUser;
+
 	}
 }
