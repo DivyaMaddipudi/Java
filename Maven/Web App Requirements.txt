@@ -98,3 +98,14 @@ context.xml in META-INF File
  
 </Context>
 
+----------------------------------------------
+14-07-2020
+---------------------------------------------
+java.lang.ClassCastException: class java.util.Date cannot be cast to class java.sql.Date (java.util.Date is in module java.base of loader 'bootstrap'; java.sql.Date is in module java.sql of loader 'platform')
+	entity.Diary.<init>(Diary.java:19)
+	controller.HomeController.doPost(HomeController.java:59)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+
+
