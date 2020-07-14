@@ -21,6 +21,13 @@ public class LoginUsers {
 		this.email = email;
 		this.password = password;
 	}
+	
+
+	public LoginUsers(String email, String password) {
+		super();
+		this.email = email;
+		this.password = password;
+	}
 
 	public int getUsers_id() {
 		return users_id;

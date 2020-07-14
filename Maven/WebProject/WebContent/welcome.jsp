@@ -5,7 +5,7 @@
 		<!-- <img src="images/signup-bg.jpg" alt=""> -->
 		<div class="container">
 			<div class="signup-content">
-				<form action="${pageContext.request.contextPath}/home" method="post">
+				<form action="${pageContext.request.contextPath}/Operation" method="post">
 
 					<div class="form-group">
 						<label for="start">Current date</label> <br /> <input type="date"
@@ -23,7 +23,7 @@
 
 
 					<div class="form-group">
-						<input type="hidden" name="action" value="saveDiary"
+						<input type="hidden" name="diaryForm" value="saveDiary"
 							class="agree-term" />
 					</div>
 

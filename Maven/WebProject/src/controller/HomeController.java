@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import entity.Diary;
@@ -37,52 +40,52 @@ public class HomeController extends HttpServlet {
 		action = action.toLowerCase();
 		
 		switch(action) {
-		case "signup":
+		case "signupsubmit":
+			String name = request.getParameter("name");
 			LoginUsers newUser = new LoginUsers(request.getParameter("name"), request.getParameter("email"), request.getParameter("password"));
 			addUser(newUser);
 			
-			request.getRequestDispatcher("welcome.jsp").forward(request, response);
-			request.setAttribute("title", "welcome");
-			break;
-		case "savediary":
+			response.getWriter().print("User Added!!");
 			
-			String date1 = request.getParameter("start");
-	        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
-		    Date date = null;
-		    
-		    try {
-		    	date = dateFormat.parse(date1);
-		    } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-			
-	        java.sql.Date sDate = new java.sql.Date(date.getTime());
-
-	        
-			Diary newDiaryContent = new Diary(sDate, request.getParameter("content"));
-			addDiaryContent(newDiaryContent);
-			response.sendRedirect(request.getContextPath() + "/home?action=savediary");
-			//request.getRequestDispatcher("diarySaved.jsp").forward(request, response);
+	
+		case "loginsubmit":
+			request.setAttribute("title", "Login page");
+			authenticateUser(request, response);
+			break;		
 			
 		default:
 			errorPage(request, response);
+			break;
 			
 		}
 	}
-
 	
 	private void addUser(LoginUsers newUser) {
 		new LoginUsersModel().addUser(dataSource, newUser);
 		return;
 	}
-	
-	private void addDiaryContent(Diary newDiaryContent) {
-		new DiaryModel().addDiaryContent(dataSource, newDiaryContent);
-		return;
+		
+	private void authenticateUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		
+		
+		boolean isUser = new LoginUsersModel().getUserDetails(dataSource, email, password);	
+		
+		if(isUser) {
+			request.getSession().invalidate();
+			
+			HttpSession newSession = request.getSession(true);
+			newSession.setMaxInactiveInterval(300);
+			
+			newSession.setAttribute("username", email);
+			
+			request.getRequestDispatcher("welcome.jsp").forward(request, response);
+		} else {
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+			
+		}
 	}
-	
 	
 	public void errorPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("title", "error Page");

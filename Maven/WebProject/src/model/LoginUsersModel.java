@@ -34,7 +34,40 @@ public class LoginUsersModel {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public boolean getUserDetails(DataSource dataSource, String email, String password) {
 
+		Connection conn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+		String dbEmail;
+		String dbPassword;
+		boolean isUser = false;
 		
+		try {
+			conn = dataSource.getConnection();
+			 
+			String query = "select email, password from loginusers";
+			
+			myStmt = conn.createStatement();
+			
+			myRs = myStmt.executeQuery(query);
+
+			if(myRs.next()) {
+				dbEmail = myRs.getString("email");
+				dbPassword = myRs.getString("password");
+				if(email.equals(dbEmail) && password.equals(dbPassword)) {
+					isUser = true;
+				} else {
+					isUser = false;
+				}	
+			}		
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return isUser;
 	}
 }
