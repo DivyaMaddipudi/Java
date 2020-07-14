@@ -9,17 +9,17 @@
                     <form action="${pageContext.request.contextPath}/home" method="POST" id="signup-form" class="signup-form">
                         <h2 class="form-title">Create account</h2>
                         <div class="form-group">
-                            <input type="text" class="form-input" name="name" id="name" placeholder="Your Name"/>
+                            <input type="text" class="form-input" name="name" id="name" placeholder="Your Name" required="required"/>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-input" name="email" id="email" placeholder="Your Email"/>
+                            <input type="email" class="form-input" name="email" id="email" placeholder="Your Email" required="required"/>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-input" name="password" id="password" placeholder="Password"/>
+                            <input type="password" class="form-input" name="password" id="password" placeholder="Password" required="required"/>
                             <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password"/>
+                            <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password" required="required"/>
                         </div>
                         <div class="form-group">
                             <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />

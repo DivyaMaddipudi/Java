@@ -41,13 +41,18 @@ public class HomeController extends HttpServlet {
 		
 		switch(action) {
 		case "signupsubmit":
-			String name = request.getParameter("name");
-			LoginUsers newUser = new LoginUsers(request.getParameter("name"), request.getParameter("email"), request.getParameter("password"));
-			addUser(newUser);
+			String password = request.getParameter("password");
+			String re_password = request.getParameter("re_password");
+			if(password.equals(re_password)) {
+				LoginUsers newUser = new LoginUsers(request.getParameter("name"), request.getParameter("email"), request.getParameter("password"));
+				addUser(newUser);
+				response.getWriter().print("User Added!!");
+			} else {
+				
+			}
 			
-			response.getWriter().print("User Added!!");
+			break;
 			
-	
 		case "loginsubmit":
 			request.setAttribute("title", "Login page");
 			authenticateUser(request, response);
@@ -86,6 +91,7 @@ public class HomeController extends HttpServlet {
 			
 		}
 	}
+	
 	
 	public void errorPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("title", "error Page");
