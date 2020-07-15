@@ -38,7 +38,7 @@ public class UsersModel {
 		return listUser;
 	}
 
-	public boolean addUser(DataSource dataSource, User newUser) {
+	public void addUser(DataSource dataSource, User newUser) {
 		Connection conn = null;
 		PreparedStatement mySt = null;
 		try {
@@ -49,15 +49,55 @@ public class UsersModel {
 			mySt = conn.prepareStatement(query);
 			mySt.setString(1, username);
 			mySt.setString(2, email);
-			return mySt.execute();
+			mySt.execute();
 			
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-			return false;
 		}
 		
 	}
 
+	public void updateUser(DataSource dataSource, User updatedUser) {
+		Connection conn = null;
+		PreparedStatement mySt = null;
+		try {
+			conn = dataSource.getConnection();
+			int usersId = updatedUser.getUsers_id();
+			String username = updatedUser.getUsername();
+			String email = updatedUser.getEmail();
+			String query = "update users set username = ?, email =? where users_id = ?";
+			mySt = conn.prepareStatement(query);
+			mySt.setString(1, username);
+			mySt.setString(2, email);
+			mySt.setInt(3, usersId);
+			mySt.execute();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
 
+	public void deleteUser(DataSource dataSource, User deleteUser) {
+		
+		Connection conn = null;
+		PreparedStatement mySt = null;
+		try {
+			conn = dataSource.getConnection();
+			int usersId = deleteUser.getUsers_id();
+			
+			String query = "delete from users where users_id = ?";
+			mySt = conn.prepareStatement(query);
+		
+			mySt.setInt(1, usersId);
+			mySt.execute();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+	}
 }

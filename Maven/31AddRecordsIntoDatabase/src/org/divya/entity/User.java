@@ -20,7 +20,10 @@ public class User {
 		this.username = username;
 		this.email = email;
 	}
-
+	
+	public User(int users_id) {
+		this.users_id = users_id;
+	}
 
 
 	public int getUsers_id() {
