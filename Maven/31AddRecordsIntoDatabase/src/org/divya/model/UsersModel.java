@@ -79,18 +79,17 @@ public class UsersModel {
 		}
 	}
 
-	public void deleteUser(DataSource dataSource, User deleteUser) {
+	public void deleteUser(DataSource dataSource, int UsersId) {
 		
 		Connection conn = null;
 		PreparedStatement mySt = null;
 		try {
 			conn = dataSource.getConnection();
-			int usersId = deleteUser.getUsers_id();
 			
 			String query = "delete from users where users_id = ?";
 			mySt = conn.prepareStatement(query);
 		
-			mySt.setInt(1, usersId);
+			mySt.setInt(1, UsersId);
 			mySt.execute();
 			
 		} catch (SQLException e) {

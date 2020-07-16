@@ -39,7 +39,9 @@ public class OperationController extends HttpServlet {
 			updateUserFormLoader(request, response);
 			break;
 		case "deleteuser":
-			deleteUserOperation(request, response);
+			String userId = request.getParameter("usersId");
+			deleteUser(Integer.parseInt(userId));
+			listUsers(request, response);
 			break;
 		default:
 			errorPage(request, response);
@@ -49,14 +51,11 @@ public class OperationController extends HttpServlet {
 		
 	}
 	
-	private void deleteUserOperation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String userId = request.getParameter("usersId");
-		User deleteUser = new User(Integer.parseInt(userId));
-		new UsersModel().deleteUser(dataSource, deleteUser);
-		request.setAttribute("title", "delete user");
-		listUsers(request, response);
+	
+	private void deleteUser(int UsersId) {
+		new UsersModel().deleteUser(dataSource, UsersId);
 		return;
+		
 	}
 
 	@Override

@@ -14,10 +14,11 @@
 			<th> Email </th>
 			<th> Operation </th>
 			</thead>
+			<%! String deleteURL; %>
 			<%
 			List<User> listUsers = (List)request.getAttribute("listUser");
 			String updateURL;
-			String deleteURL;
+			
 			
 			for(int i=0;i<listUsers.size();i++) {
 				out.print("<tr>");
@@ -31,14 +32,17 @@
 							"&username=" +listUsers.get(i).getUsername() +
 							"&email=" + listUsers.get(i).getEmail();
 				
-				deleteURL = request.getContextPath()+"/operation?page=deleteUser" +
+				deleteURL = request.getContextPath() + "/operation?page=deleteUser" +
 						"&usersId=" + listUsers.get(i).getUsers_id();
 				
-				out.print("<td><a href=" +updateURL +"> Update</a> | <a href=" +deleteURL +"> Delete</a></td>");
-				
-				out.print("</tr>");
-			}
+				out.print("<td><a href=" +updateURL +"> Update</a>|");
 			
+			%>
+			<a href= "<%=deleteURL%>" 
+				onclick="if(!confirm('Are you sure to delete the user?')) return false"> Delete </a></td>
+			</tr>
+			<%	
+			}
 			%>
 			</table>
 			
