@@ -75,6 +75,7 @@ public class FixFormula {
 		
 		int sum = 0;
 		String operator = operators.get(0);
+		
 		switch(operator) {
 		case "+":
 			sum = Integer.parseInt(numbers.get(0)) + Integer.parseInt(numbers.get(1));

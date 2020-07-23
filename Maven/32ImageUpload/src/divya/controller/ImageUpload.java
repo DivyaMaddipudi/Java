@@ -24,6 +24,7 @@ public class ImageUpload extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
 	
+	
 	try {
 		List<FileItem> images = upload.parseRequest((RequestContext) request);
 		for(FileItem image: images) {
