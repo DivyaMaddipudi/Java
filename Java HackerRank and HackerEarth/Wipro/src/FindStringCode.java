@@ -69,11 +69,11 @@ public class FindStringCode {
 		int len = val.length();
 		if(len%2 == 0) {
 			for(int i=0;i<len/2;i++) {
-				difference = difference + (asciiValue(val.charAt(i)) - asciiValue(val.charAt(len - i - 1)));
+				difference = difference + Math.abs((asciiValue(val.charAt(i)) - asciiValue(val.charAt(len - i - 1))));
 			}
 		} else {
 			for(int i=0;i<len/2;i++) {
-				difference = difference + (asciiValue(val.charAt(i)) - asciiValue(val.charAt(len - i - 1)));
+				difference = difference + Math.abs((asciiValue(val.charAt(i)) - asciiValue(val.charAt(len - i - 1))));
 			}	
 			difference = difference + asciiValue(val.charAt(len/2));
 		}
