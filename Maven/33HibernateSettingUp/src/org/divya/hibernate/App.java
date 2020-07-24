@@ -59,11 +59,12 @@ public class App {
 			Hibusers user = new Hibusers();
 			session.beginTransaction();
 			
-			user = session.get(Hibusers.class, 3);
+			user = session.get(Hibusers.class, 2);
 			
 			//Deleting a record with user id 3
 			session.delete(user);
 			
+			System.out.println(user);
 			session.getTransaction().commit();
 			
 			
