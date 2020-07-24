@@ -55,6 +55,7 @@ public class App {
 			
 			*/
 			
+			/*
 			//Delete user
 			Hibusers user = new Hibusers();
 			session.beginTransaction();
@@ -66,6 +67,8 @@ public class App {
 			
 			System.out.println(user);
 			session.getTransaction().commit();
+			*/
+			
 			
 			
 		} finally {
