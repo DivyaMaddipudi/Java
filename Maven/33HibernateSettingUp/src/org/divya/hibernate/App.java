@@ -30,6 +30,7 @@ public class App {
 			System.out.println("Row added!");
 			*/
 			
+			/*
 			//Retriving data from db.
 			
 			Hibusers user = new Hibusers();
@@ -40,6 +41,31 @@ public class App {
 			
 			session.getTransaction().commit();
 			System.out.println(user);
+			*/
+			
+			/*
+			 //Update user
+			Hibusers user = new Hibusers();
+			session.beginTransaction();
+			
+			user = session.get(Hibusers.class, 4);
+			user.setUsername("divya");
+			session.getTransaction().commit();
+			System.out.println(user);
+			
+			*/
+			
+			//Delete user
+			Hibusers user = new Hibusers();
+			session.beginTransaction();
+			
+			user = session.get(Hibusers.class, 3);
+			
+			//Deleting a record with user id 3
+			session.delete(user);
+			
+			session.getTransaction().commit();
+			
 			
 		} finally {
 			session.close();
