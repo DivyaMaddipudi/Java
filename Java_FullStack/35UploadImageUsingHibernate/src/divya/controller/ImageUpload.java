@@ -15,13 +15,16 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import divya.hibernate.DAO.FilesDAO;
+import divya.hibernate.entity.Files;
+
 /**
  * Servlet implementation class ImageUpload
  */
 @WebServlet("/ImageUpload")
 public class ImageUpload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    public String path = "c:/images/";
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
@@ -33,7 +36,9 @@ public class ImageUpload extends HttpServlet {
 				
 				String name = image.getName();
 				try {name = name.substring(name.lastIndexOf("\\")+1);} catch(Exception e) {}
-				image.write(new File("c:/images/" + name));
+				image.write(new File(path + name));
+				
+				new FilesDAO().addFileDetails(new Files(name));
 			}
 		
 		} catch (Exception e) {
