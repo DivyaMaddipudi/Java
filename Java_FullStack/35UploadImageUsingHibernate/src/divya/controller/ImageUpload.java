@@ -36,9 +36,10 @@ public class ImageUpload extends HttpServlet {
 				
 				String name = image.getName();
 				try {name = name.substring(name.lastIndexOf("\\")+1);} catch(Exception e) {}
-				image.write(new File(path + name));
+				
 				
 				new FilesDAO().addFileDetails(new Files(name));
+				image.write(new File(path + name));
 			}
 		
 		} catch (Exception e) {

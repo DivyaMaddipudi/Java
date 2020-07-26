@@ -8,7 +8,7 @@ import divya.hibernate.entity.Files;
 
 public class FilesDAO {
 	SessionFactory factory = new Configuration()
-								 .configure("hibernate.cgf.xml")
+								 .configure("hibernate.cfg.xml")
 								 .addAnnotatedClass(Files.class)
 								 .buildSessionFactory();
 	
