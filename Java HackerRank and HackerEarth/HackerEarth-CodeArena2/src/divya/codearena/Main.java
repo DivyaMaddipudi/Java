@@ -11,13 +11,13 @@
 	First line of input will contain D (total number of days). Then for each day first line will contain N (Number of items) . 
 	Next each N lines will contains two integers P (price of ith item on that day) and W(weight of ith item on that day) separated by a space. 
 	Last line for the input of the particular day will contain Wmax and C separated by a space.
-	
+
 	Output
 	For each day output “For Day #day_number:” then in next line print the maximum total price. 
 	If his friend is not able to purchase any of the item then print -1.
-	
+
 	input
-2
+3
 3
 10 20
 20 30
@@ -25,13 +25,14 @@
 50 2
 
 1
-3
+4
 10 20
 20 30
-30 60
-90 2
+30 30
+40 30
+90 3
 
-	
+
 	output
 	For Day #1:
 	30
@@ -44,52 +45,60 @@ import java.util.Scanner;
 public class Main {
 	public static int subArrays(int[] weight, int k, int maxWeight) {
 		int n = weight.length;
-		
+
 		int index = 0;
-	    for (int i = 0; i < n - k + 1; i++) 
-	    { 
-	  
-	        int current_sum = 0; 
-	   
-	        for (int j = 0; j < k; j++) {
-	            current_sum = current_sum + weight[i + j]; 
-	            if(current_sum == maxWeight) {
-	            	index = i;
-	            }
-	        }
-	    }
+		for (int i = 0; i < n - k + 1; i++) 
+		{ 
+
+			int current_sum = 0; 
+
+			for (int j = 0; j < k; j++) {
+				current_sum = current_sum + weight[i + j]; 
+				if(current_sum == maxWeight) {
+					index = i;
+				}
+			}
+		}
 		return index;
 	}
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int days = sc.nextInt();
-		
+
 		for(int i=1;i<=days;i++) {
 			int numOfItems = sc.nextInt();
+			if(numOfItems == 0) {
+				System.out.println("For Day #" +i+":");
+				System.out.println("-1");
+			} else {
 
 			int[] price = new int[numOfItems];
 			int[] weight = new int[numOfItems];
-			
+
 			for(int j=0;j<numOfItems;j++) {
 				price[j] = sc.nextInt();
 				weight[j] = sc.nextInt();
 			}
+			
 			int maxWeight = sc.nextInt();
 			int itemsCount = sc.nextInt();
-		
+
 			int index = subArrays(weight, itemsCount, maxWeight);
 			System.out.println(index);
 
-			int cost = 0;
-			while(itemsCount != 0) {
-				cost = cost + price[index];
-				index ++;
-				itemsCount--;
+				int cost = 0;
+				
+				while(itemsCount != 0) {
+					cost = cost + price[index];
+					index ++;
+					itemsCount--;
+				}
+				System.out.println("For Day #" +i+":");
+				System.out.println(cost);
 			}
-			System.out.println("For day #" +i+":");
-			System.out.println(cost);
+
 		}
-		
+
 	}
 
 }
