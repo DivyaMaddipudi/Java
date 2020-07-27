@@ -17,12 +17,20 @@
 	If his friend is not able to purchase any of the item then print -1.
 	
 	input
-	1
-	3
-	10 20
-	20 30
-	30 40
-	50 2
+2
+3
+10 20
+20 30
+30 40
+50 2
+
+1
+3
+10 20
+20 30
+30 60
+90 2
+
 	
 	output
 	For Day #1:
@@ -34,38 +42,54 @@ package divya.codearena;
 import java.util.Scanner;
 
 public class Main {
+	public static int subArrays(int[] weight, int k, int maxWeight) {
+		int n = weight.length;
+		
+		int index = 0;
+	    for (int i = 0; i < n - k + 1; i++) 
+	    { 
+	  
+	        int current_sum = 0; 
+	   
+	        for (int j = 0; j < k; j++) {
+	            current_sum = current_sum + weight[i + j]; 
+	            if(current_sum == maxWeight) {
+	            	index = i;
+	            }
+	        }
+	    }
+		return index;
+	}
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int days = sc.nextInt();
-		int numOfItems = sc.nextInt();
 		
-		int[] price = new int[numOfItems];
-		int[] weight = new int[numOfItems];
-		for(int i=0;i<numOfItems;i++) {
-			price[i] = sc.nextInt();
-			weight[i] = sc.nextInt();
+		for(int i=1;i<=days;i++) {
+			int numOfItems = sc.nextInt();
+
+			int[] price = new int[numOfItems];
+			int[] weight = new int[numOfItems];
+			
+			for(int j=0;j<numOfItems;j++) {
+				price[j] = sc.nextInt();
+				weight[j] = sc.nextInt();
+			}
+			int maxWeight = sc.nextInt();
+			int itemsCount = sc.nextInt();
+		
+			int index = subArrays(weight, itemsCount, maxWeight);
+			System.out.println(index);
+
+			int cost = 0;
+			while(itemsCount != 0) {
+				cost = cost + price[index];
+				index ++;
+				itemsCount--;
+			}
+			System.out.println("For day #" +i+":");
+			System.out.println(cost);
 		}
 		
-		int maxWeight = sc.nextInt();
-		int itemsCount = sc.nextInt();
-		
-		int res = 0;
-        for (int i=0; i<itemsCount; i++) 
-        	res += weight[i]; 
-        
-        int index = 0;
-        int currSum = res;
-		for(int i=itemsCount;i<numOfItems;i++) {
-			currSum += weight[i] - weight[i-itemsCount]; 
-	           if(currSum == maxWeight) {
-	        	   index = i;
-	           }
-		}
-		int cost = 0;
-		for(int i=index;i<itemsCount;i++) {
-			cost = cost + price[i];
-		}
-		System.out.println(cost);
 	}
 
 }
