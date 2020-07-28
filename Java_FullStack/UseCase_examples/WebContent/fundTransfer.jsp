@@ -31,6 +31,7 @@ cus_id: <%=customerId %>
 		
 		<input type="hidden" name="action" value="transferFund">
 		<input type="hidden" name="cusId" value="<%= customerId %>">
+		<input type="hidden" name="username" value="<%= username %>">
 		
 		<input type="submit" name="transfer" id="transfer" value="Transfer"/>
 	</form>

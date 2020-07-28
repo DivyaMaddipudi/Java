@@ -30,6 +30,13 @@ public class Customers {
 		this.password = password;
 	}
 
+	
+	public Customers(int cus_id, int balance) {
+		super();
+		this.cus_id = cus_id;
+		this.balance = balance;
+	}
+
 	public int getCus_id() {
 		return cus_id;
 	}

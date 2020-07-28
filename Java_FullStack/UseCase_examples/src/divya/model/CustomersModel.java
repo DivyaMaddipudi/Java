@@ -43,8 +43,6 @@ public class CustomersModel {
 
 		HashMap<String, String> customerMap = new HashMap<>();
 
-		HashMap<String, String> customerIdMap = new HashMap<>();
-
 		Connection connect = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -120,32 +118,29 @@ public class CustomersModel {
 		return balance;
 	}
 
-	public int updateBalance(int cusId, int newBalance, DataSource dataSource) {
-		int balance = 0;
+	public void updateBalance(Customers newBalance, DataSource dataSource) {
+		
 		Connection connect = null;
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		ResultSet rs = null;
 
 		try {
 			connect = dataSource.getConnection();
+			int cus_id = newBalance.getCus_id();
+			int balance = newBalance.getBalance();
 
-			String query = "UPDATE customers " + "SET balance ="+ newBalance + "WHERE cus_id="+cusId;
-			stmt = connect.createStatement();
+			String query = "UPDATE customers SET balance = ? WHERE cus_id= ?";
+			stmt = connect.prepareStatement(query);
+			stmt.setInt(1, balance);
+			stmt.setInt(2, cus_id);
 
-			rs = stmt.executeQuery(query);
-			while(rs.next()) {
-
-				balance = rs.getInt("balance");
-
-			}
-
-			
-			
+			stmt.executeUpdate();
+			System.out.println("balance updated");
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
-		return balance;	
+		
 	}
 
 }

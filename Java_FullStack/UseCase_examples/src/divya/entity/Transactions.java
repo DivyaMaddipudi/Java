@@ -10,9 +10,9 @@ public class Transactions {
 	private int cus_id;
 	private int transc_amt;
 	private String transc_type;
-	private Timestamp transc_date;
+	private Date transc_date;
 	
-	public Transactions(int tranc_id, int cus_id, int transc_amt, String transc_type, Timestamp transc_date) {
+	public Transactions(int tranc_id, int cus_id, int transc_amt, String transc_type, Date transc_date) {
 		this.tranc_id = tranc_id;
 		this.cus_id = cus_id;
 		this.transc_amt = transc_amt;
@@ -25,11 +25,10 @@ public class Transactions {
 		this.cus_id = cus_id;
 		this.transc_amt = transc_amt;
 		this.transc_type = transc_type;
-		this.transc_date = transc_date;
 	}
 	
 
-	public Transactions(int transc_amt, String transc_type, Timestamp transc_date) {
+	public Transactions(int transc_amt, String transc_type, Date transc_date) {
 		super();
 		this.transc_amt = transc_amt;
 		this.transc_type = transc_type;
@@ -68,10 +67,10 @@ public class Transactions {
 	public void setTransc_type(String transc_type) {
 		this.transc_type = transc_type;
 	}
-	public Timestamp getTransc_date() {
+	public Date getTransc_date() {
 		return transc_date;
 	}
-	public void setTransc_date(Timestamp transc_date) {
+	public void setTransc_date(Date transc_date) {
 		this.transc_date = transc_date;
 	}
 

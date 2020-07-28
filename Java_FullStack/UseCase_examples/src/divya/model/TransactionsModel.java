@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -32,7 +34,7 @@ public class TransactionsModel {
 
 			rs = stmt.executeQuery(query);
 			while(rs.next()) {
-				listUsers.add(new Transactions(rs.getInt("tranc_amt"), rs.getString("tranc_type"), rs.getTimestamp("tranc_date")));
+				listUsers.add(new Transactions(rs.getInt("tranc_amt"), rs.getString("tranc_type"), rs.getDate("tranc_date")));
 
 			}
 		} catch (SQLException e) {
@@ -43,20 +45,38 @@ public class TransactionsModel {
 
 	}
 
-	public boolean addTransaction(DataSource dataSource, Transactions newTransaction) {
+	public boolean addTransaction(Transactions newTransaction, DataSource dataSource ) {
 		Connection conn = null;
 		PreparedStatement mySt = null;
 		try {
 			conn = dataSource.getConnection();
+			
+			//int cus_id = cusId;
+			//System.out.println(cus_id);
+			int cus_id = newTransaction.getCus_id();
 			int tranc_amt = newTransaction.getTransc_amt();
 			String tranc_type = newTransaction.getTransc_type();
 			
+			java.util.Date date=new java.util.Date();
+			
+			java.sql.Date tranc_date=new java.sql.Date(date.getTime());
+			
+			java.sql.Timestamp sqlTime=new java.sql.Timestamp(date.getTime());
 
-
-			String query = "insert into customers (tranc_amt, tranc_type, tranc_date) values (?, ?, CURRENT_TIMESTAMP)";
+			
+			System.out.println(sqlTime);
+			System.out.println(tranc_date);
+			
+//			String selectId = "select cus_id from customers where username =" + username;
+			
+			
+			String query = "insert into transactions (cus_id, tranc_amt, tranc_type, tranc_date) values (?, ?, ?, ?)";
 			mySt = conn.prepareStatement(query);
-			mySt.setInt(1, tranc_amt);
-			mySt.setString(2, tranc_type);		
+			mySt.setInt(1, cus_id);
+			mySt.setInt(2, tranc_amt);
+			mySt.setString(3, tranc_type);
+			mySt.setTimestamp(4, sqlTime);
+			
 			return mySt.execute();
 
 		} catch (SQLException e) {

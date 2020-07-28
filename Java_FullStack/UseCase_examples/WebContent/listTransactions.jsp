@@ -15,7 +15,7 @@
 		balance = (int) request.getSession().getAttribute("balance");
 	%>
 	<p><font color="red">${successMessage}</font></p>
-	<strong>List Transactions</strong>
+	<strong>List Of Transactions</strong>
 	<hr>
 	<table border="1">
 	<thead>
@@ -25,13 +25,13 @@
 	</thead>
 	
 	<%
-	List<Transactions> listUsers = (List)request.getAttribute("listTransactions");
-	java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	for(int i=0;i<listUsers.size();i++) {
+	List<Transactions> listTransactions = (List)request.getAttribute("listTransactions");
+	if(listTransactions.size() > 5) {
+	for(int i=0;i<5;i++) {
 		out.print("<tr>");
-		out.print("<td>" +listUsers.get(i).getTransc_amt() + "</td>");
-		out.print("<td>" +listUsers.get(i).getTransc_type()+ "</td>");
-		out.print("<td>" +sdf.format(listUsers.get(i).getTransc_date()) + "</td>");
+		out.print("<td>" +listTransactions.get(i).getTransc_amt() + "</td>");
+		out.print("<td>" +listTransactions.get(i).getTransc_type()+ "</td>");
+		out.print("<td>" +listTransactions.get(i).getTransc_date() + "</td>");
 		out.print("</tr>");
 		
 	}
@@ -40,6 +40,21 @@
 	out.print("<td>" + "Total Balance:" +"</td>");
 	out.print("<td>" + balance +"</td>");
 	out.print("</tr>");
+	} else {
+		for(int i=0;i<listTransactions.size();i++) {
+			out.print("<tr>");
+			out.print("<td>" +listTransactions.get(i).getTransc_amt() + "</td>");
+			out.print("<td>" +listTransactions.get(i).getTransc_type()+ "</td>");
+			out.print("<td>" +listTransactions.get(i).getTransc_date() + "</td>");
+			out.print("</tr>");
+			
+		}
+		out.print("<tr>");
+		out.print("<td>" + "</td>");
+		out.print("<td>" + "Total Balance:" +"</td>");
+		out.print("<td>" + balance +"</td>");
+		out.print("</tr>");
+	}
 	
 	%>
 		
