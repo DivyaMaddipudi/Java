@@ -1,6 +1,7 @@
 package divya.entity;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.ZonedDateTime;
 
 public class Transactions {
@@ -9,9 +10,9 @@ public class Transactions {
 	private int cus_id;
 	private int transc_amt;
 	private String transc_type;
-	private Date transc_date;
+	private Timestamp transc_date;
 	
-	public Transactions(int tranc_id, int cus_id, int transc_amt, String transc_type, Date transc_date) {
+	public Transactions(int tranc_id, int cus_id, int transc_amt, String transc_type, Timestamp transc_date) {
 		this.tranc_id = tranc_id;
 		this.cus_id = cus_id;
 		this.transc_amt = transc_amt;
@@ -20,18 +21,26 @@ public class Transactions {
 	}
 	
 	
-	public Transactions(int cus_id, int transc_amt, String transc_type, Date transc_date) {
+	public Transactions(int cus_id, int transc_amt, String transc_type) {
 		this.cus_id = cus_id;
 		this.transc_amt = transc_amt;
 		this.transc_type = transc_type;
 		this.transc_date = transc_date;
 	}
+	
 
-	public Transactions(int transc_amt, String transc_type, Date transc_date) {
+	public Transactions(int transc_amt, String transc_type, Timestamp transc_date) {
 		super();
 		this.transc_amt = transc_amt;
 		this.transc_type = transc_type;
 		this.transc_date = transc_date;
+	}
+
+
+	public Transactions(int transc_amt, String transc_type) {
+
+		this.transc_amt = transc_amt;
+		this.transc_type = transc_type;
 	}
 
 
@@ -59,10 +68,10 @@ public class Transactions {
 	public void setTransc_type(String transc_type) {
 		this.transc_type = transc_type;
 	}
-	public Date getTransc_date() {
+	public Timestamp getTransc_date() {
 		return transc_date;
 	}
-	public void setTransc_date(Date transc_date) {
+	public void setTransc_date(Timestamp transc_date) {
 		this.transc_date = transc_date;
 	}
 

@@ -113,6 +113,7 @@ public class HomeController extends HttpServlet {
 			newSession.setAttribute("username", username);
 			newSession.setAttribute("cusId", cusId);
 			newSession.setAttribute("balance", balance);
+			
 
 
 			request.getRequestDispatcher("welcome.jsp").forward(request, response);

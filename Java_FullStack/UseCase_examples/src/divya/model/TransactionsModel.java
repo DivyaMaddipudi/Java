@@ -1,6 +1,7 @@
 package divya.model;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,6 +13,7 @@ import javax.sql.DataSource;
 import divya.entity.Transactions;
 
 public class TransactionsModel {
+
 
 	public List<Transactions> listTransactionsById(int customerId, DataSource dataSource) {
 
@@ -30,7 +32,7 @@ public class TransactionsModel {
 
 			rs = stmt.executeQuery(query);
 			while(rs.next()) {
-				listUsers.add(new Transactions(rs.getInt("tranc_amt"), rs.getString("tranc_type"), rs.getDate("tranc_date")));
+				listUsers.add(new Transactions(rs.getInt("tranc_amt"), rs.getString("tranc_type"), rs.getTimestamp("tranc_date")));
 
 			}
 		} catch (SQLException e) {
@@ -39,6 +41,30 @@ public class TransactionsModel {
 		}
 		return listUsers;
 
+	}
+
+	public boolean addTransaction(DataSource dataSource, Transactions newTransaction) {
+		Connection conn = null;
+		PreparedStatement mySt = null;
+		try {
+			conn = dataSource.getConnection();
+			int tranc_amt = newTransaction.getTransc_amt();
+			String tranc_type = newTransaction.getTransc_type();
+			
+
+
+			String query = "insert into customers (tranc_amt, tranc_type, tranc_date) values (?, ?, CURRENT_TIMESTAMP)";
+			mySt = conn.prepareStatement(query);
+			mySt.setInt(1, tranc_amt);
+			mySt.setString(2, tranc_type);		
+			return mySt.execute();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			return false;
+		}
+		
 	}
 }
 

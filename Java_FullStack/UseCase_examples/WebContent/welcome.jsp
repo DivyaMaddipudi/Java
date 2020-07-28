@@ -25,7 +25,7 @@ cus_id: <%=customerId %>
 		<ul>
           <li><a href="${pageContext.request.contextPath}/operation?page=history&cusId=<%= customerId %>">Transactions History</a></li>  
           <li><a href="${pageContext.request.contextPath}/operation?page=balance&cusId=<%= customerId %>">Balance</a></li>
-          <li><a href="${pageContext.request.contextPath}/operation?page=fundtransfer&cusId=<%= customerId %>">Fund Transfer</a></li>
+          <li><a href="fundTransfer.jsp">Fund Transfer</a></li>
           <li><a href="${pageContext.request.contextPath}/operation?page=logout">Logout</a></li>
         </ul>
 </body>

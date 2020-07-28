@@ -13,7 +13,7 @@ import divya.entity.Customers;
 
 public class CustomersModel {
 
-	
+
 	public boolean addCustomer(DataSource dataSource, Customers newCustomer) {
 		Connection conn = null;
 		PreparedStatement mySt = null;
@@ -22,29 +22,29 @@ public class CustomersModel {
 			String username = newCustomer.getUsername();
 			String password = newCustomer.getPassword();
 			String email = newCustomer.getEmail();
-			
+
 			String query = "insert into customers (username, password, email) values (?, ?, ?)";
 			mySt = conn.prepareStatement(query);
 			mySt.setString(1, username);
 			mySt.setString(2, password);
 			mySt.setString(3, email);			
 			return mySt.execute();
-			
+
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 			return false;
 		}
 
-		
+
 	}
 
 	public HashMap<String, String> listCustomers(DataSource dataSource) {
-		
+
 		HashMap<String, String> customerMap = new HashMap<>();
-		
+
 		HashMap<String, String> customerIdMap = new HashMap<>();
-		
+
 		Connection connect = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -57,9 +57,9 @@ public class CustomersModel {
 
 			rs = stmt.executeQuery(query);
 			while(rs.next()) {
-				
+
 				customerMap.put(rs.getString("username"), rs.getString("password"));
-				
+
 			}
 		} catch (SQLException e) {
 
@@ -67,11 +67,11 @@ public class CustomersModel {
 		}
 		return customerMap;
 	}
-	
+
 	public HashMap<String, String> listCustomerIds(DataSource dataSource) {
-		
+
 		HashMap<String, String> customerIdMap = new HashMap<>();
-		
+
 		Connection connect = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -84,9 +84,9 @@ public class CustomersModel {
 
 			rs = stmt.executeQuery(query);
 			while(rs.next()) {
-				
+
 				customerIdMap.put(rs.getString("username"), rs.getString("cus_id"));
-				
+
 			}
 		} catch (SQLException e) {
 
@@ -96,8 +96,56 @@ public class CustomersModel {
 	}
 
 	public int getBalanceById(int cusId, DataSource dataSource) {
-		
-		return 0;
+		int balance = 0;
+		Connection connect = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			connect = dataSource.getConnection();
+
+			String query = "select balance from customers where cus_id=" + cusId;
+			stmt = connect.createStatement();
+
+			rs = stmt.executeQuery(query);
+			while(rs.next()) {
+
+				balance = rs.getInt("balance");
+
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return balance;
+	}
+
+	public int updateBalance(int cusId, int newBalance, DataSource dataSource) {
+		int balance = 0;
+		Connection connect = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			connect = dataSource.getConnection();
+
+			String query = "UPDATE customers " + "SET balance ="+ newBalance + "WHERE cus_id="+cusId;
+			stmt = connect.createStatement();
+
+			rs = stmt.executeQuery(query);
+			while(rs.next()) {
+
+				balance = rs.getInt("balance");
+
+			}
+
+			
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return balance;	
 	}
 
 }
