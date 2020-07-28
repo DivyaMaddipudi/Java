@@ -6,13 +6,16 @@ public class Customers {
 	private String username;
 	private String password;
 	private String email;
+	private int balance;
 	
-	public Customers(int cus_id, String username, String password, String email) {
+	
+	public Customers(int cus_id, String username, String password, String email, int balance) {
 		super();
 		this.cus_id = cus_id;
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.balance = balance;
 	}
 
 	public Customers(String username, String password, String email) {
@@ -26,8 +29,6 @@ public class Customers {
 		this.username = username;
 		this.password = password;
 	}
-
-
 
 	public int getCus_id() {
 		return cus_id;
@@ -53,4 +54,13 @@ public class Customers {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public int getBalance() {
+		return balance;
+	}
+
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+
 }

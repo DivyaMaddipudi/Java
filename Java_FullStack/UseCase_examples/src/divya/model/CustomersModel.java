@@ -41,7 +41,10 @@ public class CustomersModel {
 
 	public HashMap<String, String> listCustomers(DataSource dataSource) {
 		
-		HashMap<String, String> userMap = new HashMap<>();
+		HashMap<String, String> customerMap = new HashMap<>();
+		
+		HashMap<String, String> customerIdMap = new HashMap<>();
+		
 		Connection connect = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -49,18 +52,52 @@ public class CustomersModel {
 		try {
 			connect = dataSource.getConnection();
 
-			String query = "select username, password from customers";
+			String query = "select cus_id, username, password from customers";
 			stmt = connect.createStatement();
 
 			rs = stmt.executeQuery(query);
 			while(rs.next()) {
-				userMap.put(rs.getString("username"), rs.getString("password"));
+				
+				customerMap.put(rs.getString("username"), rs.getString("password"));
+				
 			}
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
-		return userMap;
+		return customerMap;
+	}
+	
+	public HashMap<String, String> listCustomerIds(DataSource dataSource) {
+		
+		HashMap<String, String> customerIdMap = new HashMap<>();
+		
+		Connection connect = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			connect = dataSource.getConnection();
+
+			String query = "select cus_id, username, password from customers";
+			stmt = connect.createStatement();
+
+			rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				
+				customerIdMap.put(rs.getString("username"), rs.getString("cus_id"));
+				
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return customerIdMap;
+	}
+
+	public int getBalanceById(int cusId, DataSource dataSource) {
+		
+		return 0;
 	}
 
 }
