@@ -9,39 +9,28 @@ public class Transactions {
 	private int tranc_id;
 	private int cus_id;
 	private int transc_amt;
-	private String transc_type;
 	private Date transc_date;
 	private String account_name;
 	
-	public Transactions(int tranc_id, int cus_id, int transc_amt, String transc_type, Date transc_date) {
+	public Transactions(int tranc_id, int cus_id, int transc_amt, Date transc_date) {
 		this.tranc_id = tranc_id;
 		this.cus_id = cus_id;
 		this.transc_amt = transc_amt;
-		this.transc_type = transc_type;
 		this.transc_date = transc_date;
 	}
 	
 	
-	public Transactions(int cus_id, int transc_amt, String transc_type, String account_name) {
+	public Transactions(int cus_id, int transc_amt, String account_name) {
 		this.cus_id = cus_id;
 		this.transc_amt = transc_amt;
-		this.transc_type = transc_type;
 		this.account_name = account_name;
 	}
 	
 
-	public Transactions(int transc_amt, String transc_type, Date transc_date, String account_name) {
+	public Transactions(int transc_amt, Date transc_date, String account_name) {
 		this.transc_amt = transc_amt;
-		this.transc_type = transc_type;
 		this.transc_date = transc_date;
 		this.account_name = account_name;
-	}
-
-
-	public Transactions(int transc_amt, String transc_type) {
-
-		this.transc_amt = transc_amt;
-		this.transc_type = transc_type;
 	}
 
 
@@ -63,12 +52,7 @@ public class Transactions {
 	public void setTransc_amt(int transc_amt) {
 		this.transc_amt = transc_amt;
 	}
-	public String getTransc_type() {
-		return transc_type;
-	}
-	public void setTransc_type(String transc_type) {
-		this.transc_type = transc_type;
-	}
+
 	public Date getTransc_date() {
 		return transc_date;
 	}

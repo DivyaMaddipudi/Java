@@ -28,12 +28,12 @@ public class TransactionsModel {
 			connect = dataSource.getConnection();
 			int cus_id = customerId;
 			//2. create sql query
-			String query = "select tranc_amt, tranc_type, tranc_date, account_name  from transactions where cus_id =" + cus_id;
+			String query = "select tranc_amt, tranc_date, account_name  from transactions where cus_id =" + cus_id;
 			stmt = connect.createStatement();
 
 			rs = stmt.executeQuery(query);
 			while(rs.next()) {
-				listUsers.add(new Transactions(rs.getInt("tranc_amt"), rs.getString("tranc_type"), rs.getDate("tranc_date"), rs.getString("account_name")));
+				listUsers.add(new Transactions(rs.getInt("tranc_amt"), rs.getDate("tranc_date"), rs.getString("account_name")));
 
 			}
 		} catch (SQLException e) {
@@ -52,7 +52,6 @@ public class TransactionsModel {
 			
 			int cus_id = newTransaction.getCus_id();
 			int tranc_amt = newTransaction.getTransc_amt();
-			String tranc_type = newTransaction.getTransc_type();
 			String account_name = newTransaction.getAccount_name();
 			
 			java.util.Date date=new java.util.Date();
@@ -61,13 +60,12 @@ public class TransactionsModel {
 		    java.sql.Date tranc_date = new java.sql.Date(calendar.getTime().getTime());
 			
 			
-			String query = "insert into transactions (cus_id, tranc_amt, tranc_type, tranc_date, account_name) values (?, ?, ?, ?, ?)";
+			String query = "insert into transactions (cus_id, tranc_amt, tranc_date, account_name) values (?, ?, ?, ?)";
 			mySt = conn.prepareStatement(query);
 			mySt.setInt(1, cus_id);
 			mySt.setInt(2, tranc_amt);
-			mySt.setString(3, tranc_type);
-			mySt.setDate(4, tranc_date);
-			mySt.setString(5, account_name);
+			mySt.setDate(3, tranc_date);
+			mySt.setString(4, account_name);
 			
 			mySt.executeUpdate();
 

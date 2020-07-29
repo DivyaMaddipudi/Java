@@ -10,14 +10,14 @@
 </head>
 <body>
 	
-	<p><font color="red">${successMessage}</font></p>
+	<p><font color="red">${fundTransferMessage}</font></p>
 	<strong>List Of Transactions</strong>
 	<hr>
 	<table border="1">
 	<thead>
-	<th>Transaction Amount</th>
-	<th>Transaction Type</th>
+	<th>Transfer to</th>
 	<th>Transaction Date</th>
+	<th>Transaction Amount</th>
 	</thead>
 	
 	<%
@@ -29,7 +29,7 @@
 	if(size > 5) {
 	for(int i=size -1;i>= (size-5) ;i--) {
 		out.print("<tr>");
-		out.print("<td>" +listTransactions.get(i).getTransc_type()+ "</td>");
+		out.print("<td>" +listTransactions.get(i).getAccount_name()+ "</td>");
 		out.print("<td>" +listTransactions.get(i).getTransc_date() + "</td>");
 		out.print("<td>" +listTransactions.get(i).getTransc_amt() + "</td>");
 		out.print("</tr>");
@@ -43,9 +43,9 @@
 	} else {
 		for(int i=size-1;i>=0;i--) {
 			out.print("<tr>");
-			out.print("<td>" +listTransactions.get(i).getTransc_amt() + "</td>");
-			out.print("<td>" +listTransactions.get(i).getTransc_type()+ "</td>");
+			out.print("<td>" +listTransactions.get(i).getAccount_name()+ "</td>");
 			out.print("<td>" +listTransactions.get(i).getTransc_date() + "</td>");
+			out.print("<td>" +listTransactions.get(i).getTransc_amt() + "</td>");
 			out.print("</tr>");
 			
 		}

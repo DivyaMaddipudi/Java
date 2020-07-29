@@ -14,21 +14,23 @@
 		customerId = request.getSession().getAttribute("cusId").toString();
 %>
 
-Username: <%=username%><br />
-cus_id: <%=customerId %>
+<strong>Enter amount and account username transfer fund !</strong>
+
+<br />
 
 
 	<form action="${pageContext.request.contextPath}/operation" method="post">
 		<p><font color="red">${errorMessage}</font></p>
 		Amount: <input type="number" name="transferAmount" placeholder="transferAmount" required="required"> 
 		<br/>
+		<br/>
 		Username: <input type="text" name="toUsername" placeholder="Username of another account" required="required">
+		<br/>
 		<br/>
 		
 		<input type="hidden" name="action" value="transferFund">
 		<input type="hidden" name="cusId" value="<%= customerId %>">
 		<input type="hidden" name="username" value="<%= username %>">
-		<input type="hidden" name="action" value="receiveFund">
 		<input type="submit" name="transfer" id="transfer" value="Transfer"/>
 	</form>
 

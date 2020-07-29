@@ -50,13 +50,7 @@ public class OperationController extends HttpServlet {
 			request.getSession().invalidate();
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 			break;
-		case "receivefund":
-
-			String username = request.getParameter("username");
-			int transferId = getCustomerId(username);
-			int transferAmount = Integer.parseInt(request.getParameter("transferAmount"));
-			crediToAccount(transferId, transferAmount, username);
-			break;
+			
 		default:
 			errorPage(request, response);
 			break;
@@ -70,11 +64,13 @@ public class OperationController extends HttpServlet {
 
 		switch (action) {
 		case "transferfund":
-			String cusId = request.getParameter("cusId");
+			int cusId = Integer.parseInt(request.getParameter("cusId"));
 			transferFund(request, response);
 			
+			String username = request.getParameter("username");
+			request.setAttribute("fundTransferMessage", "Funds transferred to" + username);
 			response.sendRedirect(request.getContextPath()+"/operation?page=history&cusId=" + cusId);
-			
+			//crediToAccount(request, response);
 			break;
 
 		default:
@@ -85,18 +81,18 @@ public class OperationController extends HttpServlet {
 
 
 	private void transferFund(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		int transferAmount = Integer.parseInt(request.getParameter("transferAmount"));
 		
-		String username = request.getParameter("toUsername");
-		
+		String toUsername = request.getParameter("toUsername");
 		int cusId = Integer.parseInt(request.getParameter("cusId"));
-
 		int balance = getBalanceById(cusId);
 		
-		
-		String type = "debit";
 
-		if(balance < transferAmount) {
+		String username = request.getParameter("username");
+		int transferId = getCustomerId(username);
+
+		if((balance - 500) < transferAmount) {
 			// implement if balance is < transfer amount
 			request.setAttribute("errorMessage", "Insufficient balance");
 			request.getRequestDispatcher("fundTransfer.jsp").forward(request, response);
@@ -108,15 +104,24 @@ public class OperationController extends HttpServlet {
 			Customers newBalance = new Customers(cusId, balance);
 			updateBalance(newBalance);
 			
-			Transactions newTransaction1 = new Transactions(cusId, transferAmount, type, username);
+			Transactions newTransaction1 = new Transactions(cusId, transferAmount, toUsername);
 			addTransaction(newTransaction1);			
 			
+			//crediToAccount(transferId, transferAmount, username, cusId);
 		}
 		return;
 	} 
 	
-
-	public void crediToAccount(int transferId, int transferAmount, String username){
+//	response.sendRedirect(request.getContextPath()+"/operation?page=history&cusId=" + cusId);
+/*
+	public void crediToAccount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String username = request.getParameter("username");
+		int transferId = getCustomerId(username);
+		
+		
+		int transferAmount = Integer.parseInt(request.getParameter("transferAmount"));
+		
 		
 		int balance = getBalanceById(transferId);
 		balance = balance + transferAmount;
@@ -128,8 +133,11 @@ public class OperationController extends HttpServlet {
 		
 		Transactions newTransaction = new Transactions(transferId, transferAmount, type, username);
 		addTransaction(newTransaction);
+		
 		return;
 	}
+	
+	*/
 	
 	private void addTransaction(Transactions newTransaction) {
 
@@ -169,7 +177,8 @@ public class OperationController extends HttpServlet {
 
 		request.setAttribute("balanceRemained", getBalance);
 		request.getRequestDispatcher("balance.jsp").forward(request, response);
-
+		
+		return;
 	}
 
 	//getting balance 

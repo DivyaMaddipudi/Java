@@ -50,7 +50,7 @@ public class CustomersModel {
 		try {
 			connect = dataSource.getConnection();
 
-			String query = "select cus_id, username, password from customers";
+			String query = "select username, password from customers";
 			stmt = connect.createStatement();
 
 			rs = stmt.executeQuery(query);

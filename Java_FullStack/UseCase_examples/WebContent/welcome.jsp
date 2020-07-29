@@ -18,9 +18,8 @@
 		sessionID = request.getSession().getId();
 %>
 
-Username: <%=username%><br />
-cus_id: <%=customerId %><br />
-sessionID: <%=sessionID%>
+Welcome <%=username%> !<br />
+
 
 		<ul>
           <li><a href="${pageContext.request.contextPath}/operation?page=history&cusId=<%= customerId %>">Transactions History</a></li>  
