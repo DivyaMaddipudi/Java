@@ -44,6 +44,10 @@ public class OperationController extends HttpServlet {
 		case "balance":
 			getBalance(request, response);
 			break;
+		case "destroy":
+			request.getSession().invalidate();
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+			break;
 		default:
 			errorPage(request, response);
 			break;
@@ -71,114 +75,113 @@ public class OperationController extends HttpServlet {
 
 	private void transferFund(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int transferAmount = Integer.parseInt(request.getParameter("transferAmount"));
-		
-		
+
+
 		String type = request.getParameter("type");
 		int cusId = Integer.parseInt(request.getParameter("cusId"));
 		System.out.println(cusId);
-		
+
 		int balance = getBalanceById(cusId);
 		System.out.println(balance);
-		
+
 		String username = request.getParameter("username");
 		System.out.println(username);
 
 
-		
-		if(balance < transferAmount) {
-			// implement if balance is < transfer amount
-			request.setAttribute("errorMessage", "Insufficient balance");
-			request.getRequestDispatcher("fundTransfer.jsp").forward(request, response);
+		switch(type) {
+		case "credit":
+			balance = balance + transferAmount;
+			System.out.println(balance);
 
-		} else {
-			switch(type) {
-			case "credit":
-				balance = balance + transferAmount;
-				System.out.println(balance);
-				
-				Customers newBalance = new Customers(cusId, balance);
-				String updatedBalance = String.valueOf(updateBalance(newBalance));
-				
-				
-				
-				Transactions newTransaction = new Transactions(cusId, transferAmount, type);
-				addTransaction(newTransaction);
-				
+			Customers newBalance = new Customers(cusId, balance);
+			String updatedBalance = String.valueOf(updateBalance(newBalance));
 
-				
-				break;
-			case "debit":
-				balance = balance - transferAmount;
-				System.out.println(balance);
-				
-				Customers newBalance1 = new Customers(cusId, balance);
-				String updatedBalance1 = String.valueOf(updateBalance(newBalance1));
-				
-				Transactions newTransaction1 = new Transactions(cusId, transferAmount, type);
-				addTransaction(newTransaction1);
-				
-				break;
-			default:
-				errorPage(request, response);
-				break;
+
+
+			Transactions newTransaction = new Transactions(cusId, transferAmount, type);
+			addTransaction(newTransaction);
+
+
+			break;
+		case "debit":
+			
+			if(balance < transferAmount) {
+				// implement if balance is < transfer amount
+				request.setAttribute("errorMessage", "Insufficient balance");
+				request.getRequestDispatcher("fundTransfer.jsp").forward(request, response);
+
+			} else {
+			balance = balance - transferAmount;
+			System.out.println(balance);
+
+			Customers newBalance1 = new Customers(cusId, balance);
+			String updatedBalance1 = String.valueOf(updateBalance(newBalance1));
+
+			Transactions newTransaction1 = new Transactions(cusId, transferAmount, type);
+			addTransaction(newTransaction1);
 			}
-		}
 
-
+			break;
+			
+		default:
+			errorPage(request, response);
+			break;
 	}
 
-	private void addTransaction(Transactions newTransaction) {
+}
 
-		new TransactionsModel().addTransaction(newTransaction, dataSource);
-		return;
-	}
+private void addTransaction(Transactions newTransaction) {
 
-	//Void update balance
+	new TransactionsModel().addTransaction(newTransaction, dataSource);
+	return;
+}
 
-	private int updateBalance(Customers newBalance) {
-		int updatedBalance = new CustomersModel().updateBalance(newBalance, dataSource);
-		
-		return updatedBalance;
+//Void update balance
 
-	}
+private int updateBalance(Customers newBalance) {
+	int updatedBalance = new CustomersModel().updateBalance(newBalance, dataSource);
 
-	private void printTransactions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String cusId = request.getParameter("cusId");
-		int customerId = Integer.parseInt(cusId);
+	return updatedBalance;
 
-		List<Transactions> listIdWiseTransactions = new ArrayList<>();
-		
-		String getCurrentBalance = String.valueOf(getBalanceById(customerId));
-		listIdWiseTransactions = new TransactionsModel().listTransactionsById(customerId, dataSource);
-		request.setAttribute("listTransactions", listIdWiseTransactions);
-		request.setAttribute("currentbalance", getCurrentBalance);
-		request.getRequestDispatcher("listTransactions.jsp").forward(request, response);
+}
 
-	}
+private void printTransactions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	private void getBalance(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cusId = Integer.parseInt(request.getParameter("cusId"));
-		String getBalance = String.valueOf(getBalanceById(cusId));
+	String cusId = request.getParameter("cusId");
+	int customerId = Integer.parseInt(cusId);
 
-		System.out.println(getBalance +" remain");
-		
-		request.setAttribute("balanceRemained", getBalance);
-		request.getRequestDispatcher("balance.jsp").forward(request, response);
-		
-	}
-	
-	//getting balance 
-	private int getBalanceById(int cusId) {
-		int balance;
-		balance = new CustomersModel().getBalanceById(cusId, dataSource);	
-		return balance;
-	}
-	
-	public void errorPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("title", "error Page");
-		request.getRequestDispatcher("error.jsp").forward(request, response);
-	}
+	List<Transactions> listIdWiseTransactions = new ArrayList<>();
+
+	String getCurrentBalance = String.valueOf(getBalanceById(customerId));
+	listIdWiseTransactions = new TransactionsModel().listTransactionsById(customerId, dataSource);
+	request.setAttribute("listTransactions", listIdWiseTransactions);
+	request.setAttribute("currentbalance", getCurrentBalance);
+	request.getRequestDispatcher("listTransactions.jsp").forward(request, response);
+
+}
+
+private void getBalance(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	int cusId = Integer.parseInt(request.getParameter("cusId"));
+	String getBalance = String.valueOf(getBalanceById(cusId));
+
+	System.out.println(getBalance +" remain");
+
+	request.setAttribute("balanceRemained", getBalance);
+	request.getRequestDispatcher("balance.jsp").forward(request, response);
+
+}
+
+//getting balance 
+private int getBalanceById(int cusId) {
+	int balance;
+	balance = new CustomersModel().getBalanceById(cusId, dataSource);	
+	return balance;
+}
+
+public void errorPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	request.setAttribute("title", "error Page");
+	request.getRequestDispatcher("error.jsp").forward(request, response);
+}
 
 
 }

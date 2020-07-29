@@ -41,7 +41,6 @@ public class HomeController extends HttpServlet {
 			break;
 
 		case "loginsubmit":
-			request.setAttribute("title", "Login page");
 			authenticateLoginUser(request, response);
 			break;		
 
@@ -102,6 +101,7 @@ public class HomeController extends HttpServlet {
 
 		if(isExistingUser(username, password)) {
 			//invalidate if any
+
 			request.getSession().invalidate();
 
 			HttpSession newSession = request.getSession(true);
@@ -114,7 +114,7 @@ public class HomeController extends HttpServlet {
 			request.getRequestDispatcher("welcome.jsp").forward(request, response);
 		}else {
 
-			request.setAttribute("successMessage", "Invalid email_Id or password");
+			request.setAttribute("successMessage", "Invalid username or password");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}	
 	}

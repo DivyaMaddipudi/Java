@@ -11,22 +11,22 @@
 
 <%
 		String username = null, customerId = null;
+		String sessionID = null;
 
 		username = request.getSession().getAttribute("username").toString();
 		customerId = request.getSession().getAttribute("cusId").toString();
+		sessionID = request.getSession().getId();
 %>
 
 Username: <%=username%><br />
-cus_id: <%=customerId %>
+cus_id: <%=customerId %><br />
+sessionID: <%=sessionID%>
 
-	<form>
-		
-	</form>
 		<ul>
           <li><a href="${pageContext.request.contextPath}/operation?page=history&cusId=<%= customerId %>">Transactions History</a></li>  
           <li><a href="${pageContext.request.contextPath}/operation?page=balance&cusId=<%= customerId %>">Balance</a></li>
           <li><a href="fundTransfer.jsp">Fund Transfer</a></li>
-          <li><a href="${pageContext.request.contextPath}/operation?page=logout">Logout</a></li>
+          <li><a href="${pageContext.request.contextPath}/operation?page=destroy">Logout</a></li>
         </ul>
 </body>
 </html>
