@@ -35,3 +35,9 @@ Use Case 2:
 ![Fund transfer page](https://github.com/DivyaMaddipudi/Java/blob/master/Java_FullStack/HCLUseCase/screenshots/Screenshot%205.png)
 
 ![List of transactions after funding](https://github.com/DivyaMaddipudi/Java/blob/master/Java_FullStack/HCLUseCase/screenshots/Screenshot%206.png)
+
+### Database Screenshots
+
+![customer database](https://github.com/DivyaMaddipudi/Java/blob/master/Java_FullStack/HCLUseCase/screenshots/12_customers_db.png)
+
+![transactions database](https://github.com/DivyaMaddipudi/Java/blob/master/Java_FullStack/HCLUseCase/screenshots/13_transactions_db.png)
