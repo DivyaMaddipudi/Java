@@ -23,10 +23,8 @@
 	<%
 	List<Transactions> listTransactions = (List)request.getAttribute("listTransactions");
 	String balance = (String) request.getAttribute("currentbalance");
-	out.print(balance);
 	
 	int size = listTransactions.size();
-	out.print(size);
 	
 	if(size > 5) {
 	for(int i=size -1;i>= (size-5) ;i--) {
@@ -58,8 +56,10 @@
 		out.print("</tr>");
 	}
 	
-	%>
-		
+	%>	
 	</table>
+	<br/>
+	<br/>
+	Click here to return <a href ="welcome.jsp">Home page</a>
 </body>
 </html>

@@ -139,17 +139,13 @@ public class CustomersModel {
 			stmt = connect.prepareStatement(query);
 			stmt.setInt(1, balance);
 			
-			int count = stmt.executeUpdate();
-			System.out.println("Rows affected" + count);
-			
-			
+			stmt.executeUpdate();
+	
 			rs = stmt.executeQuery(query1);
 			
 			while(rs.next()) {
 				updateBalance = rs.getInt("balance");
 			}
-
-			System.out.println("balance updated in model");
 			
 		} catch (SQLException e) {
 

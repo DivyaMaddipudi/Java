@@ -7,10 +7,13 @@
 <title>Current Balance</title>
 </head>
 <body>
-Remaing balance after fund:
+Current balance in your account:
 <%
 String balance =  (String) request.getAttribute("balanceRemained");
 out.print(balance);
 %>
+<br/>
+<br/>
+Click here to return <a href ="welcome.jsp">Home page</a>
 </body>
 </html>

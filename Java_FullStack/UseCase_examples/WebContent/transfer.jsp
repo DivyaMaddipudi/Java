@@ -13,5 +13,8 @@ Money Transfered !
 String balance = (String) request.getAttribute("balance");
 out.print("Current Balance after funding is:" + balance);
 %>
+<br/>
+<br/>
+Click here to return <a href ="welcome.jsp">Home page</a>
 </body>
 </html>

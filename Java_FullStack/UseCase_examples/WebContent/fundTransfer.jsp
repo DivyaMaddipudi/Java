@@ -22,17 +22,13 @@ cus_id: <%=customerId %>
 		<p><font color="red">${errorMessage}</font></p>
 		Amount: <input type="number" name="transferAmount" placeholder="transferAmount" required="required"> 
 		<br/>
-		<label for="transactionType">Transaction type:</label>
-		 <select name="type" required="required">
-			<option value="credit">Credit</option>
-			<option value="debit">Debit</option>
-		</select>
+		Username: <input type="text" name="toUsername" placeholder="Username of another account" required="required">
 		<br/>
 		
 		<input type="hidden" name="action" value="transferFund">
 		<input type="hidden" name="cusId" value="<%= customerId %>">
 		<input type="hidden" name="username" value="<%= username %>">
-		
+		<input type="hidden" name="action" value="receiveFund">
 		<input type="submit" name="transfer" id="transfer" value="Transfer"/>
 	</form>
 

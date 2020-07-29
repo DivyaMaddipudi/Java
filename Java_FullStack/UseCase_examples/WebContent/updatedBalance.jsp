@@ -13,6 +13,8 @@ Updated Balance:
 	out.print(updatedBalance);
 
 %>
-
+<br/>
+<br/>
+Click here to return <a href ="welcome.jsp">Home page</a>
 </body>
 </html>
