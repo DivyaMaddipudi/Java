@@ -4,9 +4,14 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Completed</title>
 </head>
 <body>
-Data Transfered
+Money Transfered !
+
+<%
+String balance = (String) request.getAttribute("balance");
+out.print("Current Balance after funding is:" + balance);
+%>
 </body>
 </html>

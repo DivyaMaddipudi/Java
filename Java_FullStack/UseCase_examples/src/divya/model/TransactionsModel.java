@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -45,29 +44,23 @@ public class TransactionsModel {
 
 	}
 
-	public boolean addTransaction(Transactions newTransaction, DataSource dataSource ) {
+	public void addTransaction(Transactions newTransaction, DataSource dataSource ) {
 		Connection conn = null;
 		PreparedStatement mySt = null;
 		try {
 			conn = dataSource.getConnection();
 			
-			//int cus_id = cusId;
-			//System.out.println(cus_id);
 			int cus_id = newTransaction.getCus_id();
 			int tranc_amt = newTransaction.getTransc_amt();
 			String tranc_type = newTransaction.getTransc_type();
 			
 			java.util.Date date=new java.util.Date();
 			
-			java.sql.Date tranc_date=new java.sql.Date(date.getTime());
-			
-			java.sql.Timestamp sqlTime=new java.sql.Timestamp(date.getTime());
+		    Calendar calendar = Calendar.getInstance();
+		    java.sql.Date tranc_date = new java.sql.Date(calendar.getTime().getTime());
 
-			
-			System.out.println(sqlTime);
+
 			System.out.println(tranc_date);
-			
-//			String selectId = "select cus_id from customers where username =" + username;
 			
 			
 			String query = "insert into transactions (cus_id, tranc_amt, tranc_type, tranc_date) values (?, ?, ?, ?)";
@@ -75,14 +68,13 @@ public class TransactionsModel {
 			mySt.setInt(1, cus_id);
 			mySt.setInt(2, tranc_amt);
 			mySt.setString(3, tranc_type);
-			mySt.setTimestamp(4, sqlTime);
+			mySt.setDate(4, tranc_date);
 			
-			return mySt.execute();
+			mySt.executeUpdate();
 
 		} catch (SQLException e) {
 
 			e.printStackTrace();
-			return false;
 		}
 		
 	}

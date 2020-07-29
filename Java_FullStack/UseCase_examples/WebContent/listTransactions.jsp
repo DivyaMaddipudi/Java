@@ -10,10 +10,6 @@
 </head>
 <body>
 	
-	<%
-		int balance = 0;
-		balance = (int) request.getSession().getAttribute("balance");
-	%>
 	<p><font color="red">${successMessage}</font></p>
 	<strong>List Of Transactions</strong>
 	<hr>
@@ -26,6 +22,8 @@
 	
 	<%
 	List<Transactions> listTransactions = (List)request.getAttribute("listTransactions");
+	String balance = (String) request.getAttribute("currentbalance");
+	out.print(balance);
 	if(listTransactions.size() > 5) {
 	for(int i=0;i<5;i++) {
 		out.print("<tr>");

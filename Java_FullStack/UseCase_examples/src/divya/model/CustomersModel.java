@@ -103,6 +103,7 @@ public class CustomersModel {
 			connect = dataSource.getConnection();
 
 			String query = "select balance from customers where cus_id=" + cusId;
+
 			stmt = connect.createStatement();
 
 			rs = stmt.executeQuery(query);
@@ -111,6 +112,7 @@ public class CustomersModel {
 				balance = rs.getInt("balance");
 
 			}
+			
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -118,8 +120,9 @@ public class CustomersModel {
 		return balance;
 	}
 
-	public void updateBalance(Customers newBalance, DataSource dataSource) {
+	public int updateBalance(Customers newBalance, DataSource dataSource) {
 		
+		int updateBalance = 0;
 		Connection connect = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -129,18 +132,29 @@ public class CustomersModel {
 			int cus_id = newBalance.getCus_id();
 			int balance = newBalance.getBalance();
 
-			String query = "UPDATE customers SET balance = ? WHERE cus_id= ?";
+			String query = "UPDATE customers SET balance = ? WHERE cus_id=" + cus_id;
+			
+			String query1 = "select balance from customers where cus_id=" + cus_id;
+			
 			stmt = connect.prepareStatement(query);
 			stmt.setInt(1, balance);
-			stmt.setInt(2, cus_id);
+			
+			int count = stmt.executeUpdate();
+			System.out.println("Rows affected" + count);
+			
+			
+			rs = stmt.executeQuery(query1);
+			
+			while(rs.next()) {
+				updateBalance = rs.getInt("balance");
+			}
 
-			stmt.executeUpdate();
-			System.out.println("balance updated");
+			System.out.println("balance updated in model");
+			
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
-		
+		return updateBalance;
 	}
-
 }

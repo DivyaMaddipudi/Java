@@ -99,11 +99,8 @@ public class HomeController extends HttpServlet {
 		String password = request.getParameter("password");
 
 		int cusId = getCustomerId(username);
-		
-		int balance = getBalance(cusId);
 
 		if(isExistingUser(username, password)) {
-
 			//invalidate if any
 			request.getSession().invalidate();
 
@@ -112,8 +109,6 @@ public class HomeController extends HttpServlet {
 
 			newSession.setAttribute("username", username);
 			newSession.setAttribute("cusId", cusId);
-			newSession.setAttribute("balance", balance);
-			
 
 
 			request.getRequestDispatcher("welcome.jsp").forward(request, response);
@@ -149,14 +144,6 @@ public class HomeController extends HttpServlet {
 		int id = Integer.parseInt(customerId);
 
 		return id;
-	}
-
-	//getting balance 
-	private int getBalance(int cusId) {
-
-		int balance;
-		balance = new CustomersModel().getBalanceById(cusId, dataSource);	
-		return balance;
 	}
 
 
