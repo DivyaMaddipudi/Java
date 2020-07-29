@@ -29,7 +29,6 @@ public class Transactions {
 	
 
 	public Transactions(int transc_amt, String transc_type, Date transc_date) {
-		super();
 		this.transc_amt = transc_amt;
 		this.transc_type = transc_type;
 		this.transc_date = transc_date;

@@ -57,7 +57,9 @@ public class OperationController extends HttpServlet {
 
 		switch (action) {
 		case "transferfund":
+			String cusId = request.getParameter("cusId");
 			transferFund(request, response);
+			response.sendRedirect(request.getContextPath()+"/operation?page=history&cusId=" + cusId);
 			break;
 
 		default:
@@ -99,11 +101,9 @@ public class OperationController extends HttpServlet {
 				
 				
 				
-//				Transactions newTransaction = new Transactions(cusId, transferAmount, type);
-//				addTransaction(newTransaction);
-//				
-				request.setAttribute("balance", updatedBalance);
-				request.getRequestDispatcher("transfer.jsp").forward(request, response);
+				Transactions newTransaction = new Transactions(cusId, transferAmount, type);
+				addTransaction(newTransaction);
+				
 
 				
 				break;
@@ -114,12 +114,9 @@ public class OperationController extends HttpServlet {
 				Customers newBalance1 = new Customers(cusId, balance);
 				String updatedBalance1 = String.valueOf(updateBalance(newBalance1));
 				
-//				
-//				Transactions newTransaction1 = new Transactions(cusId, transferAmount, type);
-//				addTransaction(newTransaction1);
-//				
-				request.setAttribute("balance", updatedBalance1);
-				request.getRequestDispatcher("transfer.jsp").forward(request, response);
+				Transactions newTransaction1 = new Transactions(cusId, transferAmount, type);
+				addTransaction(newTransaction1);
+				
 				break;
 			default:
 				errorPage(request, response);
@@ -130,11 +127,11 @@ public class OperationController extends HttpServlet {
 
 	}
 
-//	private void addTransaction(Transactions newTransaction) {
-//
-//		new TransactionsModel().addTransaction(newTransaction, dataSource);
-//		return;
-//	}
+	private void addTransaction(Transactions newTransaction) {
+
+		new TransactionsModel().addTransaction(newTransaction, dataSource);
+		return;
+	}
 
 	//Void update balance
 

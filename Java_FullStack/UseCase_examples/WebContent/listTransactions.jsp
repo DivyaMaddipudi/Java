@@ -24,9 +24,14 @@
 	List<Transactions> listTransactions = (List)request.getAttribute("listTransactions");
 	String balance = (String) request.getAttribute("currentbalance");
 	out.print(balance);
-	if(listTransactions.size() > 5) {
-	for(int i=0;i<5;i++) {
+	
+	int size = listTransactions.size();
+	out.print(size);
+	
+	if(size > 5) {
+	for(int i=size -1;i>= (size-5) ;i--) {
 		out.print("<tr>");
+		out.print("<td>" +listTransactions.get(i).getTranc_id() + "</td>");
 		out.print("<td>" +listTransactions.get(i).getTransc_amt() + "</td>");
 		out.print("<td>" +listTransactions.get(i).getTransc_type()+ "</td>");
 		out.print("<td>" +listTransactions.get(i).getTransc_date() + "</td>");
@@ -39,7 +44,7 @@
 	out.print("<td>" + balance +"</td>");
 	out.print("</tr>");
 	} else {
-		for(int i=0;i<listTransactions.size();i++) {
+		for(int i=size-1;i>=0;i--) {
 			out.print("<tr>");
 			out.print("<td>" +listTransactions.get(i).getTransc_amt() + "</td>");
 			out.print("<td>" +listTransactions.get(i).getTransc_type()+ "</td>");
