@@ -40,15 +40,13 @@
 			
 		fileId = file.getId();
 		
-		fileName = file.getFileName();
 		
 		
 		String form = 
 				"<form action='FilesHandler' method='post'>" +
 				"Label: <input type='text' name='label'/><br/><br/>" +
-				"Caption: <input type='text' name='label'/><br/><br/>" +
+				"Caption: <input type='text' name='caption'/><br/><br/>" +
 				"<input type='hidden' name='fileId' value='" + fileId +"'/><br/><br/>" +
-				"<input type='hidden' name='fileName' value='" + fileName +"'/><br/><br/>" +
 				"<input type='hidden' name='action' value='updateInfomation'/>" +
 				"<input type='submit' value='update'>" +
 				"</form>";
