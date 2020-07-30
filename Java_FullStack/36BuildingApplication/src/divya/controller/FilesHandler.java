@@ -21,8 +21,8 @@ import divya.hibernate.entity.Files;
 /**
  * Servlet implementation class ImageUpload
  */
-@WebServlet("/ImageUpload")
-public class ImageUpload extends HttpServlet {
+@WebServlet("/FilesHandler")
+public class FilesHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public String path = "c:/images/";
 
@@ -78,14 +78,14 @@ public class ImageUpload extends HttpServlet {
 					new FilesDAO().addFileDetails(new Files(name)); //Writes file into db
 					image.write(file); //Writes file into file system
 				}
-				listingImages(request, response);
+				
 			}
 
 		} catch (Exception e) {
 
 			e.printStackTrace();
 		}	
-
+		listingImages(request, response);
 	}
 
 }
