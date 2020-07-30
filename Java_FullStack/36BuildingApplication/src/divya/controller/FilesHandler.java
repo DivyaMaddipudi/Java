@@ -18,9 +18,6 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import divya.hibernate.DAO.FilesDAO;
 import divya.hibernate.entity.Files;
 
-/**
- * Servlet implementation class ImageUpload
- */
 @WebServlet("/FilesHandler")
 public class FilesHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -33,9 +30,14 @@ public class FilesHandler extends HttpServlet {
 		case "filesUpload":
 			filesUpload(request, response);
 			break;
-		
+		case "updateInfomation":
+			System.out.println("Controller");
+			updateInfo(request, response);
+			System.out.println("Controller");
+			break;
 		default:
 			request.getRequestDispatcher("index.jsp").forward(request, response);
+			break;
 		}
 	}
 	
@@ -50,6 +52,7 @@ public class FilesHandler extends HttpServlet {
 			break;
 		default:
 			request.getRequestDispatcher("index.jsp").forward(request, response);
+			break;
 		}
 	}
 	
@@ -59,6 +62,22 @@ public class FilesHandler extends HttpServlet {
 		request.setAttribute("files", files);
 		request.setAttribute("path", path);
 		request.getRequestDispatcher("listFiles.jsp").forward(request, response);
+		
+	}
+	
+	private void updateInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		int fileId = Integer.parseInt(request.getParameter("fileId"));
+		String fileName = request.getParameter("fileName");
+		System.out.println(fileId);
+		System.out.println("file name" + fileName);
+		
+		String label = request.getParameter("label");
+		String caption = request.getParameter("caption");
+		
+		Files file = new Files(fileId, fileName, label, caption);
+		new FilesDAO().updateInformation(file);
+		listingImages(request, response);
 		
 	}
 

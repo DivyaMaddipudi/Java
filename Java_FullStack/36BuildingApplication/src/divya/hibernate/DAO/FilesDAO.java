@@ -28,9 +28,15 @@ public class FilesDAO {
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
 		List<Files> files = session.createQuery("from files").getResultList();
-		//session.getTransaction().commit();
+//		session.getTransaction().commit();
 		
 		return files;
 	}
-
+	
+	public void updateInformation(Files file) {
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		session.update(file);
+		session.getTransaction().commit();
+	}
 }

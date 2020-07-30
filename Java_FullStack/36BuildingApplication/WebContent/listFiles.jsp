@@ -9,18 +9,9 @@
 <title>Listing Images</title>
 </head>
 <body>
-<%! String form; int fieldId; %>
+<%! String form; int fileId; String fileName; %>
 
 <%
-
-String form = 
-				"<form action='FilesHandler' method='post'>" +
-				"Label: <input type='text' name='label'/><br/><br/>" +
-				"Caption: <input type='text' name='label'/><br/><br/>" +
-				"<input type='hidden' name='fieldId' value='fieldId'/><br/><br/>" +
-				"<input type='submit' value='update'>" +
-				"</form>";
-
 
 %>
 
@@ -36,6 +27,8 @@ String form =
 <%
 	String path = (String) request.getAttribute("path");
 	List<Files> files = (List<Files>) request.getAttribute("files");
+	
+	
 	for(Files file: files) {
 		out.print("<tr><td><img src=" + path + file.getFileName()+" height ='200' </td>");
 				
@@ -43,9 +36,26 @@ String form =
 		  + "<li>File name:"+ file.getFileName() +"</li>" 
 		  + "<li>File Caption:"+ file.getLabel()+"</li>" 
 		  + "<li>File Caption:"+ file.getCaption() +"</li>" +"</ul></td>" + 
-		  
-		  "<td>"+ form +"</td></tr>");
+		  "</ul>");
 			
+		fileId = file.getId();
+		
+		fileName = file.getFileName();
+		
+		
+		String form = 
+				"<form action='FilesHandler' method='post'>" +
+				"Label: <input type='text' name='label'/><br/><br/>" +
+				"Caption: <input type='text' name='label'/><br/><br/>" +
+				"<input type='hidden' name='fileId' value='" + fileId +"'/><br/><br/>" +
+				"<input type='hidden' name='fileName' value='" + fileName +"'/><br/><br/>" +
+				"<input type='hidden' name='action' value='updateInfomation'/>" +
+				"<input type='submit' value='update'>" +
+				"</form>";
+				
+		out.print("<td>" + form + "</td></tr>");
+			
+		
 	}
 %>
 
