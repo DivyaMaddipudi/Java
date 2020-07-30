@@ -35,8 +35,7 @@
 		out.print("<td><ul>" + "<li>File ID:"+ file.getId() +"</li>"
 		  + "<li>File name:"+ file.getFileName() +"</li>" 
 		  + "<li>File Caption:"+ file.getLabel()+"</li>" 
-		  + "<li>File Caption:"+ file.getCaption() +"</li>" +"</ul></td>" + 
-		  "</ul>");
+		  + "<li>File Caption:"+ file.getCaption() +"</li>"+"</ul></td>");
 			
 		fileId = file.getId();
 		
@@ -52,12 +51,11 @@
 				"</form>";
 				
 		out.print("<td>" + form + "</td>");
-
 		
-		out.print("<td><ul><li><a href='"+request.getContextPath()+"/FilesHandler?action=viewImage&fileId="+ file.getId() +
-		"'>View</a></li></ul></td></tr>");
-			
-		
+		out.print("<td><ul><li><a href='"+request.getContextPath()+"/FilesHandler?action=viewImage&fileId="+file.getId()+
+		"'>View</a>"+"</li>"
+		+"<li><a href='"+request.getContextPath()+"/FilesHandler?action=deleteFile&fileId="+ file.getId()+
+		"' onClick =\"if(!confirm('Are you sure to delete the user?')) return false\">Delete</a>"+"</li></ul></td></tr>");
 	}
 %>
 </table>

@@ -44,14 +44,16 @@ public class FilesHandler extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-		System.out.println(action);
-		switch(action) {
 		
+		switch(action) {
 		case "listingImages":
 			listingImages(request, response);
 			break;
 		case "viewImage":
 			viewImage(request, response);
+			break;
+		case "deleteFile":
+			deleteFile(request, response);
 			break;
 		default:
 			request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -59,6 +61,25 @@ public class FilesHandler extends HttpServlet {
 		}
 	}
 	
+	private void deleteFile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int fileId = Integer.parseInt(request.getParameter("fileId"));
+		Files file = new FilesDAO().getFile(fileId);
+		new FilesDAO().deleteFile(fileId);
+		
+		//logic to remove file from file syatem
+		
+		File fileOnDisc = new File(path+ file.getFileName());
+		if(fileOnDisc.delete()) {
+			System.out.println("File deleted from file system");
+		} else {
+			//optional
+			System.out.println("File not deleted from file system");
+		}
+		
+		listingImages(request, response);
+	}
+
+
 	private void viewImage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int fileId = Integer.parseInt(request.getParameter("fileId"));
 		Files file = new FilesDAO().getFile(fileId);
