@@ -51,7 +51,11 @@
 				"<input type='submit' value='update'>" +
 				"</form>";
 				
-		out.print("<td>" + form + "</td></tr>");
+		out.print("<td>" + form + "</td>");
+
+		
+		out.print("<td><ul><li><a href='"+request.getContextPath()+"/FilesHandler/action=viewImage&fileId="+ fileId +
+		"'>View Image</a></li></ul></td></tr>");
 			
 		
 	}
