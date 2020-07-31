@@ -35,7 +35,7 @@ public class App
         // Creating bean another method in spring IDE
         
         AnnotationConfigApplicationContext contex = new AnnotationConfigApplicationContext(AppConfig.class);
-        Cars myCars = contex.getBean(Cars.class);
+        Cars myCars = contex.getBean("celerio", Cars.class);
         System.out.println(myCars.cars());
         contex.close();
        
