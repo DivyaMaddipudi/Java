@@ -60,4 +60,28 @@ public class LoginUsersModel {
 		return userMap;
 
 	}
+	
+	public HashMap<String, String> getUserId(DataSource dataSource) {
+		HashMap<String, String> idMap = new HashMap<>();
+		Connection connect = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			connect = dataSource.getConnection();
+
+			String query = "select * from loginusers";
+			stmt = connect.createStatement();
+
+			rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				idMap.put(rs.getString("email"), rs.getString("users_id"));
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return idMap;
+
+	}
 }

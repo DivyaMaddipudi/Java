@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -30,6 +32,19 @@ public class Operation extends HttpServlet {
        
    	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String page = request.getParameter("page");
+		page = page.toLowerCase();
+
+		switch (page) {
+		case "history":
+			viewHistory(request, response);
+			break;
+
+		default:
+			errorPage(request, response);
+			break;
+
+		}
 	}
 
    	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,18 +52,17 @@ public class Operation extends HttpServlet {
 		action = action.toLowerCase();
 		
 		switch(action) {
+		
 		case "savediary":	
-			String date1 = request.getParameter("start");	
-	        java.sql.Date sDate = toSqlDate(date1);
-	        
-			Diary newDiaryContent = new Diary(sDate, request.getParameter("content"));
+	        int usersId = Integer.parseInt(request.getParameter("userId"));
+
+			Diary newDiaryContent = new Diary(usersId, request.getParameter("content"));
 			addDiaryContent(newDiaryContent);
 			
 			request.setAttribute("title", "Diary saved");
 			request.getRequestDispatcher("diarySaved.jsp").forward(request, response);
 			
-			break;
-			
+			break;	
 			
 		default:
 			errorPage(request, response);
@@ -56,25 +70,24 @@ public class Operation extends HttpServlet {
 
 		}
 	}
+   	
+   	
+	private void viewHistory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		int userId = Integer.parseInt(request.getParameter("userId"));
+
+		List<Diary> diaryHistory = new ArrayList<>();
+		
+		diaryHistory = new DiaryModel().printHistory(dataSource, userId);
+		
+		request.setAttribute("diaryHistory", diaryHistory);
+		request.getRequestDispatcher("diaryHistory.jsp").forward(request, response);
+		
+	}
+	
    	private void addDiaryContent(Diary newDiaryContent) {
 		new DiaryModel().addDiaryContent(dataSource, newDiaryContent);
 		return;
-	}
-   	
-	private java.sql.Date toSqlDate(String date1) {
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-	    Date date = null;
-	  
-	    try {
-	    	date = dateFormat.parse(date1);
-	    } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        java.sql.Date sDate = new java.sql.Date(date.getTime());
-        
-		return sDate;
-
 	}
 
 	public void errorPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -6,6 +6,7 @@
             <div class="container">
                 <div class="signup-content">
                 	<h1>Saved successfully!</h1>
+                	<p> Click here to return to <a href="welcome.jsp">Home Page</a> </p>
                 </div>
             </div>
         </section>
