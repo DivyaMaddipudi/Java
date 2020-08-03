@@ -62,6 +62,7 @@ public class HomeController extends HttpServlet {
 			Customers newCustomer = new Customers(username, password, email);
 			addCustomer(newCustomer);
 			request.setAttribute("successMessage", "Now you can login to the account...");
+			request.setAttribute("title", "Login Page");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 
 		} else {
@@ -109,12 +110,13 @@ public class HomeController extends HttpServlet {
 
 			newSession.setAttribute("username", username);
 			newSession.setAttribute("cusId", cusId);
-
-
+			
+			//request.setAttribute("title", "Welcome");
 			request.getRequestDispatcher("welcome.jsp").forward(request, response);
 		}else {
 
 			request.setAttribute("successMessage", "Invalid username or password");
+			request.setAttribute("title", "Login Page");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}	
 	}

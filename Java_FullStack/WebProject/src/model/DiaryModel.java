@@ -60,17 +60,40 @@ public class DiaryModel {
 		try {
 			connect = dataSource.getConnection();
 
-			String query = "select date, content from diary where users_id=" + userId;
+			String query = "select * from diary where users_id=" + userId;
 			stmt = connect.createStatement();
 
 			rs = stmt.executeQuery(query);
 			while(rs.next()) {
-				diaryHistory.add(new Diary(rs.getDate("date"), rs.getString("content")));
+				diaryHistory.add(new Diary(rs.getInt("diary_id"), rs.getDate("date"), rs.getString("content")));
+				System.out.println(rs.getInt("diary_id"));
+				
 			}
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
 		return diaryHistory;
+	}
+
+	public void deleteDiaryContent(int userId, DataSource dataSource) {
+		Connection connect = null;
+		PreparedStatement stmt = null;
+		//ResultSet rs = null;
+
+		try {
+			connect = dataSource.getConnection();
+
+			String query = "delete from diary where users_id =" + userId;
+			stmt = connect.prepareStatement(query);
+
+			stmt.execute();
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		
+		
 	}
 }

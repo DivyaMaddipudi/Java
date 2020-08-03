@@ -73,4 +73,5 @@ public class Diary {
 		this.users_id = users_id;
 	}
 	
+	
 }

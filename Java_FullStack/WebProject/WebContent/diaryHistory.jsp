@@ -15,22 +15,25 @@
             <div class="container">
                 <div class="signup-content">
                 <h1>	History ! </h1>
-                	<table width="500" border="1">
+                	<table width="550" border="1">
 					<%
+					
 						List<Diary> diaryHistory = (List<Diary>) request.getAttribute("diaryHistory");
-						
 						
 						out.print("<tr>");
 						out.print("<th>"+ "Date" +"</td>");
 						out.print("<th>"+ "Content" +"</td>");
+						
 						out.print("</tr>");
 						
 						for(int i=0;i<diaryHistory.size();i++) {
 						out.print("<tr>");
+						
 						out.print("<td>" +diaryHistory.get(i).getDate() + "</td>");
 						out.print("<td>" +diaryHistory.get(i).getContent()+ "</td>");
-						out.print("</tr>");
 						
+						
+						out.print("</tr>");
 						
 					}
 					%>

@@ -39,7 +39,14 @@ public class Operation extends HttpServlet {
 		case "history":
 			viewHistory(request, response);
 			break;
-
+		case "deletecontent":
+			deleteContent(request, response);
+			break;
+		case "logout":
+			request.getSession().invalidate();
+			request.setAttribute("title", "Login Page");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+			break;
 		default:
 			errorPage(request, response);
 			break;
@@ -47,7 +54,7 @@ public class Operation extends HttpServlet {
 		}
 	}
 
-   	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
    		String action = request.getParameter("diaryForm");
 		action = action.toLowerCase();
 		
@@ -59,7 +66,7 @@ public class Operation extends HttpServlet {
 			Diary newDiaryContent = new Diary(usersId, request.getParameter("content"));
 			addDiaryContent(newDiaryContent);
 			
-			request.setAttribute("title", "Diary saved");
+			request.setAttribute("title", "Saved Content");
 			request.getRequestDispatcher("diarySaved.jsp").forward(request, response);
 			
 			break;	
@@ -70,16 +77,36 @@ public class Operation extends HttpServlet {
 
 		}
 	}
+	
    	
+	private void deleteContent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int userId = Integer.parseInt(request.getParameter("userId"));
+		
+		System.out.println(userId);
+		
+		deleteDiaryContent(userId);
+		
+		viewHistory(request, response);
+		return;
+		
+	}
    	
+	private void deleteDiaryContent(int userId) {
+		new DiaryModel().deleteDiaryContent(userId, dataSource);
+		return;
+	}
+
 	private void viewHistory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int userId = Integer.parseInt(request.getParameter("userId"));
+		
+		request.setAttribute("userId", userId);
 
 		List<Diary> diaryHistory = new ArrayList<>();
 		
 		diaryHistory = new DiaryModel().printHistory(dataSource, userId);
 		
+		request.setAttribute("title", "History");
 		request.setAttribute("diaryHistory", diaryHistory);
 		request.getRequestDispatcher("diaryHistory.jsp").forward(request, response);
 		

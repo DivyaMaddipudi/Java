@@ -19,7 +19,15 @@
                     <a href="${pageContext.request.contextPath}/Operation?page=history&userId=<%= userId%>">Written History</a>
                 </div>
                 
-
+				<div class="form-group">
+                    <a href="${pageContext.request.contextPath}/Operation?page=deleteContent&userId=<%= userId%>" onClick ="if(!confirm('Are you sure to delete all the previous entries?')) return false">Delete your past savings!</a>
+                </div>
+				
+				<div class="form-group">
+                    <a href="${pageContext.request.contextPath}/Operation?page=logout">Logout</a>
+                </div>
+                
+				
 					<div class="form-group">
 						<textarea id="content" name="content" placeholder="Write about your day.." cols="58" rows="20"></textarea>
 					</div>

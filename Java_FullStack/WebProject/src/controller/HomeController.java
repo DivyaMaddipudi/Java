@@ -74,6 +74,7 @@ public class HomeController extends HttpServlet {
 			LoginUsers newUser = new LoginUsers(request.getParameter("name"), email, password);
 			addUser(newUser);
 			request.setAttribute("successMessage", "Now you can login to the account...");
+			request.setAttribute("title", "Login Page");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 
 		} else {
@@ -122,10 +123,13 @@ public class HomeController extends HttpServlet {
 
 			newSession.setAttribute("email", email);
 			newSession.setAttribute("userId", userId);
-
+			
+			request.setAttribute("successMessage", "Invalid email_Id or password");
+			request.setAttribute("title", "Welcome");
 			request.getRequestDispatcher("welcome.jsp").forward(request, response);
 		} else {
 			request.setAttribute("successMessage", "Invalid email_Id or password");
+			request.setAttribute("title", "Login Page");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 	}
